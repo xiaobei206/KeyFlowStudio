@@ -33,8 +33,12 @@ jobs:
       - name: Test Image Resource Manager WinForms layout
         shell: pwsh
         run: |
-          & "artifacts/publish/win-x64/Anjian.App.exe" --image-resource-ui-smoke-test
-          if ($LASTEXITCODE -ne 0) { throw "Image Resource Manager UI smoke test failed with exit code $LASTEXITCODE" }
+          $smokeOutput = Join-Path $env:RUNNER_TEMP "KeyFlowStudio-ImageResourceUiSmoke.txt"
+          $smokeError = Join-Path $env:RUNNER_TEMP "KeyFlowStudio-ImageResourceUiSmoke.err"
+          $smoke = Start-Process -FilePath "artifacts/publish/win-x64/Anjian.App.exe" -ArgumentList "--image-resource-ui-smoke-test" -Wait -PassThru -NoNewWindow -RedirectStandardOutput $smokeOutput -RedirectStandardError $smokeError
+          if (Test-Path $smokeOutput) { Get-Content $smokeOutput }
+          if (Test-Path $smokeError) { Get-Content $smokeError }
+          if ($smoke.ExitCode -ne 0) { throw "Image Resource Manager UI smoke test failed with exit code $($smoke.ExitCode)" }
       - name: Test packaged sprite runtime and Worker
         shell: pwsh
         run: |

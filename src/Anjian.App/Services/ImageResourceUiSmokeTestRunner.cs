@@ -17,6 +17,7 @@ internal static class ImageResourceUiSmokeTestRunner
             form.PerformLayout();
             foreach (Control control in form.Controls)
                 control.PerformLayout();
+            Console.WriteLine("Image Resource Manager layout smoke test passed.");
             return 0;
         }
         catch (Exception ex)
