@@ -1011,3 +1011,11 @@ M13-01..04 的代码与 Windows 自动化工作已收尾。下一会话不再重
 - 开发包的最近可用证据为 Actions artifact ID `14081447842`（外层 archive digest `sha256:a702a44769706fd06dbbc197aa3f34f83cd6fe1dc9f550930326359239e34897`，预计保留到 2026-12-13；artifact 不是 Release）。包来自文档改动前后相同的应用代码 HEAD；使用时仍须核对包内产品 ZIP 的 SHA256 sidecar。
 - ROADMAP、FEATURE-MATRIX、ACCEPTANCE 已追加同一 M14 阻塞记录。对应提交：ROADMAP `3173d09335f3fafb9f659e7810152368028f262c`；FEATURE-MATRIX `ff9f186b0696a349823258572f216f78bc79e7dc`；ACCEPTANCE `f53383633da71d2c59d0f3a60ffeb6e28d0c2f42`。
 - **下一会话唯一任务仍是 M14**：在实际 Windows 10/11 x64 机器完成 `docs/ACCEPTANCE-TEST-CN.md` 中全部实机项并提供 OS build、DPI/屏幕拓扑、实际结果、日志/截图；根据可复现失败修复后重复相应项。用户未提供实机执行证据前，不将 NOT RUN 改为 PASS、不发布新版本，也不转做其他里程碑。
+
+
+# 用户反馈后调整：发布可下载的 M14 测试版（2026-11-15；优先级高于此前“不新建 Release”的临时阻塞说明）
+
+- 用户指出无法下载 sandbox/Actions artifact，而且程序没有放进 GitHub Release；这一阻塞属实。为使 M14 可以实际开始，明确覆盖前文“未提供实机证据前不创建 Release”的旧临时约束：先发布一个新的测试预发布版 `v0.1.0-preview.5`，不覆盖 `v0.1.0-preview.4`，不宣称 M14 已通过，也不是稳定 `1.0.0`。
+- 发布依据：按仓库现有 `.github/workflows/windows-build.yml`，以 commit message 前缀 `release:` 触发 Windows 构建、测试、self-contained win-x64 ZIP、SHA256 sidecar 与 GitHub prerelease 创建。已同步 `VERSION` 和 `src/Anjian.App/Anjian.App.csproj` 到 `0.1.0-preview.5`，以通过 workflow 的 ProductVersion 一致性检查。
+- 发布链接（由 workflow 生成）：https://github.com/xiaobei206/anjian/releases/tag/v0.1.0-preview.5；ZIP: https://github.com/xiaobei206/anjian/releases/download/v0.1.0-preview.5/Anjian2026-0.1.0-preview.5-win-x64.zip；SHA256: https://github.com/xiaobei206/anjian/releases/download/v0.1.0-preview.5/Anjian2026-0.1.0-preview.5-win-x64.zip.sha256。只有核实 workflow 成功并确认 Release 资产确实存在后，才可报告发布成功；失败则需修复并重跑。
+- M14 所有桌面实测在用户机器实际运行前仍 NOT RUN。下一会话唯一任务仍是 M14：从 Release 下载 ZIP，核验 sidecar、完整解压并实测；收集 Windows build、DPI/拓扑、结果、日志和截图。CI 不替代实机结果。

@@ -954,3 +954,12 @@ M13-04 已结束；唯一下一任务为 M14：集中执行 Windows 10/11 桌面
 - 最近一次可核实的 Windows Actions 全流程为 [43518664871](https://github.com/xiaobei206/anjian/actions/runs/43518664871)，提交 HEAD `a2edd7fdc6176c7963a815d1939a522ef7c84262`，应用代码基线 `6d9513bec5de35ed8f20f656d8520217d949733a`；228/228 Core tests、Build 0 warnings/errors、API handbook、self-contained win-x64、package smoke 4/4、ZIP/SHA 与 artifact upload PASS。其后 `3fc67c4...` 为文档提交；本工具未能核实该 exact HEAD 的独立 Actions run，所以不把前一 run 冒称为 3fc 的 CI 结果。
 - 更新文档提交：ROADMAP `3173d09335f3fafb9f659e7810152368028f262c`；FEATURE-MATRIX `ff9f186b0696a349823258572f216f78bc79e7dc`；ACCEPTANCE `f53383633da71d2c59d0f3a60ffeb6e28d0c2f42`；SESSION-HANDOFF `e295b33d2aa2bdf2d1808334ad6db13454e383e1`。本日志提交是本轮文档提交链的最后一笔，最终 SHA 以本次 GitHub API 返回值为准。
 - 下一步：必须在真实 Windows 10/11 x64 设备运行开发包、完成 `docs/ACCEPTANCE-TEST-CN.md` M14 清单，附 OS build、DPI/拓扑、脚本、逐项结果、日志与截图。当前状态是环境阻塞，不是产品测试 PASS/FAIL；不修改 VERSION，不创建 tag/Release。
+
+
+## 2026-11-15 — 解除 M14 测试包下载阻塞：准备发布 v0.1.0-preview.5
+
+- 用户反馈无法下载之前提供的会话附件，而且仓库 Release 中没有当前 main 测试程序。该反馈属实：之前的构建主要作为有期限的 Actions artifact 提供，不适合作为实机测试的稳定下载入口。
+- 已核实 main HEAD `c633ca801f1e16c644732da41ec3c92470f60329` 对应 Windows Actions run [43519871750](https://github.com/xiaobei206/anjian/actions/runs/43519871750) SUCCESS；artifact ID `14081099809`、87,373,851 bytes。之前提供的临时附件/Actions artifact 没有解决用户下载问题。
+- 为提供正式的公开测试下载入口，本次将 `VERSION` 与 App `<Version>` 同步提升到 `0.1.0-preview.5`，并以现有 release-trigger workflow 生成新的 prerelease、win-x64 ZIP 和 SHA256 sidecar。该动作只为 M14 实机测试提供可下载程序，不代表 M14 已验收，不覆盖 preview.4、不发布稳定版 1.0.0。
+- 发布 commit 推送后必须以实际 Windows Actions run 核验 Restore/Build/Core tests/API handbook/publish/package checks/release assets。workflow 未 PASS 或 Release 资产不存在前不能声称已发布成功。
+- 实机测试仍 NOT RUN。后续在真实 Windows 10/11 x64 设备核验 SHA256、完整解压运行，并执行 M14 清单，提交 OS build、DPI/拓扑、测试结果、日志和截图。

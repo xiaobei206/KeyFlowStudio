@@ -114,3 +114,9 @@ F31 从 M13-01 的“契约/状态模型部分实现”更新为 M13-02“运行
 - M14 实机验收本次仍为 **NOT RUN / 环境阻塞**：当前会话运行于 Linux x86_64、没有 .NET SDK，也没有可交互 Windows 桌面及物理键鼠通道。
 - 这不是产品测试失败，也不是 PASS；M14 所有真实键鼠、WinForms、DPI/多屏、权限、托盘/退出和长时运行项目继续 NOT RUN。已存在的 Windows Actions 结果仅作为自动化构建证据，不代替桌面验收。
 - 恢复条件：在实际 Windows 10/11 x64 设备上逐项执行 `docs/ACCEPTANCE-TEST-CN.md` 的 M14 清单，提交完整环境元数据、逐项结果及失败日志/截图，再更新相应功能状态。
+
+
+### 2026-11-15 — M14 测试包下载入口
+
+- 为解决测试包此前仅作为 Actions artifact/会话附件、用户无法下载的问题，准备发布 `v0.1.0-preview.5` 公开 prerelease；不覆盖 preview.4，不代表桌面功能已通过。
+- 下载页：https://github.com/xiaobei206/anjian/releases/tag/v0.1.0-preview.5。M14 的真实键鼠、DPI/多屏、权限窗、托盘/退出与长时测试继续 NOT RUN，直到提交实际设备测试证据。

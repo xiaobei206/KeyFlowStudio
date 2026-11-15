@@ -644,3 +644,13 @@ M12-09 只实现有上限的显式 HTTP 缓冲请求；不代表大文件流式�
 **开发包证据来源（不是 Release）：** [Actions run 43518664871](https://github.com/xiaobei206/anjian/actions/runs/43518664871)，artifact ID `14081447842`；对应的最近可核实应用代码 HEAD 为 `6d9513bec5de35ed8f20f656d8520217d949733a`。artifact archive digest 为 `sha256:a702a44769706fd06dbbc197aa3f34f83cd6fe1dc9f550930326359239e34897`，它是 Actions artifact 外层归档摘要，不应误当作里面应用 ZIP 的 SHA256。下载后仍应核对包内对应 SHA256 sidecar。
 
 **完成方式：** 在实体 Windows 10/11 x64 设备运行开发包，填全本表与上文清单；每个 FAIL 都记录复现步骤、日志和截图，修复后重测相关项。没有设备信息和执行证据时不得更改状态。
+
+
+## M14 测试程序公开下载入口（2026-11-15）
+
+- 为修复用户无法使用 sandbox/Actions artifact 下载的问题，按仓库现有工作流准备 `v0.1.0-preview.5` prerelease。
+- Release 页面：https://github.com/xiaobei206/anjian/releases/tag/v0.1.0-preview.5
+- Windows x64 ZIP：https://github.com/xiaobei206/anjian/releases/download/v0.1.0-preview.5/Anjian2026-0.1.0-preview.5-win-x64.zip
+- SHA256 sidecar：https://github.com/xiaobei206/anjian/releases/download/v0.1.0-preview.5/Anjian2026-0.1.0-preview.5-win-x64.zip.sha256
+- 使用方式：下载 ZIP，先对照 sidecar 验证 SHA256，完整解压并保留所有伴随文件，启动 `Anjian.App.exe`。这是预发布测试包而非稳定版；M14 的桌面实测仍须按前表逐项执行并保持真实状态。
+- **注意：** 上述链接只有在新的 Windows Actions release workflow 全部成功后才可用；必须核查对应 run 的 conclusion 与 Release assets。若失败，应先修复发布流水线，不能向用户宣称链接已就绪。

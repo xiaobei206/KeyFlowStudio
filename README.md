@@ -2,14 +2,22 @@
 
 Windows 10/11 x64 桌面自动化工具，首版使用 WinForms + .NET 10 + Lua 5.4。
 
-## 当前进度
+## 当前测试版下载与进度
 
-v0.1.0-preview.4 已正式发布。Windows CI 的 Restore、Build、7 项测试、自包含发布、ZIP/SHA256 和 GitHub Release 创建全部成功。preview.4 加入独立悬浮窗、系统托盘生命周期、悬浮窗循环设置和自定义 EXE/托盘图标。注意：窗口/托盘功能仍需 Windows 10/11 实机手工验收。
+**最新测试预发布版：v0.1.0-preview.5（Windows x64）**。本版用于解除 M14 实机验收的下载阻塞，包含 main 已完成的多实例、定时任务、运行实例列表与日志 UI；这是预发布测试包，不是稳定版 1.0.0。
+
+下载入口：[v0.1.0-preview.5 Release 页面](https://github.com/xiaobei206/anjian/releases/tag/v0.1.0-preview.5)、[直接下载 Windows x64 ZIP](https://github.com/xiaobei206/anjian/releases/download/v0.1.0-preview.5/Anjian2026-0.1.0-preview.5-win-x64.zip)、[SHA256 校验文件](https://github.com/xiaobei206/anjian/releases/download/v0.1.0-preview.5/Anjian2026-0.1.0-preview.5-win-x64.zip.sha256)。
+
+下载后请完整解压并保留所有运行时伴随文件，再启动 `Anjian.App.exe`；不要只拿出 EXE 单独运行。请先核对同目录 SHA256 sidecar。Windows Actions 自动化通过只是构建/自动测试证据，M14 的真实键鼠、WinForms、DPI/多屏、权限弹窗、托盘退出和长时间稳定性仍必须由 Windows 10/11 实机逐项验收。
+
+### preview.4 历史发布记录与开发进度（保留历史证据）
+
+preview.4 历史发布记录（截至 2026-11-12）。Windows CI 的 Restore、Build、7 项测试、自包含发布、ZIP/SHA256 和 GitHub Release 创建全部成功。preview.4 加入独立悬浮窗、系统托盘生命周期、悬浮窗循环设置和自定义 EXE/托盘图标。注意：窗口/托盘功能仍需 Windows 10/11 实机手工验收。
 
 下载入口：[v0.1.0-preview.4 Release](https://github.com/xiaobei206/anjian/releases/tag/v0.1.0-preview.4)，[Windows x64 ZIP](https://github.com/xiaobei206/anjian/releases/download/v0.1.0-preview.4/Anjian2026-0.1.0-preview.4-win-x64.zip)，[SHA256 sidecar](https://github.com/xiaobei206/anjian/releases/download/v0.1.0-preview.4/Anjian2026-0.1.0-preview.4-win-x64.zip.sha256)。
 ZIP SHA256：`6b59ab27f825aa48b2ec5343cec826ad8b0ded759e9989af02d51f8b949f09aa`。
 
-**main 开发状态（未发布）：** M3–M7 已进入 main；M8 图像资源 UI、manifest/assets、视觉调试、RGB/hex/颜色差值/颜色块已进入 main，Windows Actions run [43358188770](https://github.com/xiaobei206/anjian/actions/runs/43358188770) 的 85/85 tests、Build 0 warnings/errors、API 手册检查、自包含发布与 artifact 上传通过。M9 OCR 已进入 main：API registry 0.7 / 81 个函数，新增 OCR、FindText、WaitText；PaddleOcrNet 2.4.0 CPU 适配器，用户显式下载 ch/en/japan 模型，Worker 识别严格离线。M9 Windows CI run [43363150335](https://github.com/xiaobei206/anjian/actions/runs/43363150335) 全 PASS：90/90 tests、0 warnings/errors、API handbook check、win-x64 自包含发布与 ZIP/SHA256；临时 artifact 14008744436。M10 参数/配置与脚本自定义 UI 已完成实现和自动化收尾：版本化 `.params.json` sidecar、10 种类型、Core 统一校验、独立用户配置/原子写入/备份恢复、播放/调试前动态参数表单、参数设计器、JSON 导入导出、typed Worker IPC 与 Lua `Args` 只读代理；本轮加固了 `pairs(Args)` 深层只读、脚本相对路径运行时解析、Lua 保留字/非法路径校验及未来 schema 防覆盖。最终 Windows Actions run [43368224862](https://github.com/xiaobei206/anjian/actions/runs/43368224862) SUCCESS：Restore、Build（0 warnings/0 errors）、102/102 Core tests、API handbook check、自包含 win-x64 发布、ZIP/SHA256 和 artifact 上传全 PASS。临时 artifact ID 14010789337，87,099,638 bytes，SHA-256 `324ed884d9938548d2d35b94cd372a4bc46bf081f7abd1c77e17b28d1acf1323`，有效期至 2026-12-13；它不是 GitHub Release。M10 桌面验收仍 NOT RUN，M1–M13 统一延期至 M14 后。没有创建 Release，v0.1.0-preview.4 不变。M1–M13 Windows 桌面验收统一延期至 M14 后，未测项继续 NOT RUN；CI 不等于实机验收。v0.1.0-preview.4 不变，不修改 VERSION、不创建 Release。M5 窗口相对录制/回放重定位仍未实现。
+**main 开发状态（未发布）：** M3–M7 已进入 main；M8 图像资源 UI、manifest/assets、视觉调试、RGB/hex/颜色差值/颜色块已进入 main，Windows Actions run [43358188770](https://github.com/xiaobei206/anjian/actions/runs/43358188770) 的 85/85 tests、Build 0 warnings/errors、API 手册检查、自包含发布与 artifact 上传通过。M9 OCR 已进入 main：API registry 0.7 / 81 个函数，新增 OCR、FindText、WaitText；PaddleOcrNet 2.4.0 CPU 适配器，用户显式下载 ch/en/japan 模型，Worker 识别严格离线。M9 Windows CI run [43363150335](https://github.com/xiaobei206/anjian/actions/runs/43363150335) 全 PASS：90/90 tests、0 warnings/errors、API handbook check、win-x64 自包含发布与 ZIP/SHA256；临时 artifact 14008744436。M10 参数/配置与脚本自定义 UI 已完成实现和自动化收尾：版本化 `.params.json` sidecar、10 种类型、Core 统一校验、独立用户配置/原子写入/备份恢复、播放/调试前动态参数表单、参数设计器、JSON 导入导出、typed Worker IPC 与 Lua `Args` 只读代理；本轮加固了 `pairs(Args)` 深层只读、脚本相对路径运行时解析、Lua 保留字/非法路径校验及未来 schema 防覆盖。最终 Windows Actions run [43368224862](https://github.com/xiaobei206/anjian/actions/runs/43368224862) SUCCESS：Restore、Build（0 warnings/0 errors）、102/102 Core tests、API handbook check、自包含 win-x64 发布、ZIP/SHA256 和 artifact 上传全 PASS。临时 artifact ID 14010789337，87,099,638 bytes，SHA-256 `324ed884d9938548d2d35b94cd372a4bc46bf081f7abd1c77e17b28d1acf1323`，有效期至 2026-12-13；它不是 GitHub Release。M10 桌面验收仍 NOT RUN，M1–M13 统一延期至 M14 后。当时尚未创建后续 Release，preview.4 资产保持不变。M1–M13 Windows 桌面验收统一延期至 M14 后，未测项继续 NOT RUN；CI 不等于实机验收。该记录对应当时的开发阶段，后续测试包发布以本节最新信息为准。M5 窗口相对录制/回放重定位仍未实现。
 使用说明：[首版使用说明](docs/USER-GUIDE-CN.md)。
 
 ## 项目完整大纲与接手资料

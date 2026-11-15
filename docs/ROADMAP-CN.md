@@ -469,3 +469,10 @@ M13 代码/自动化工作已结束，但不代表真实 Windows 10/11 桌面验
 开始时核对的 main HEAD 为 `3fc67c4e5d60163ad686be397389028b36947d4b`（`docs: record M13-04 documentation CI evidence`）。本会话能据现有 handoff 核实的最近一次完整成功 Windows Actions 为 [43518664871](https://github.com/xiaobei206/anjian/actions/runs/43518664871)，对应文档 HEAD `a2edd7fdc6176c7963a815d1939a522ef7c84262`，228/228 Core tests、0 warnings/0 errors、API 手册检查、自包含 win-x64 publish、package smoke 4/4、ZIP/SHA 与 artifact upload 均通过。该包应用代码基线仍为 `6d9513bec5de35ed8f20f656d8520217d949733a`；Actions artifact ID `14081447842`（artifact archive digest `sha256:a702a44769706fd06dbbc197aa3f34f83cd6fe1dc9f550930326359239e34897`）。当前 HEAD `3fc67c4...` 的独立 workflow 结果在本次工具中未能核实，故不将前述 CI 结果冒称为该 HEAD 的 CI，也不将任何 CI 结果视作桌面验收。
 
 下一步仍是 M14：必须在实际 Windows 10/11 x64 机器上使用该开发包完成 `docs/ACCEPTANCE-TEST-CN.md` 中的实机清单，并记录 Windows build、DPI、显示器拓扑、脚本/步骤、逐项结果、日志与截图。拿到实际结果前，不修改 M14 项目状态、不创建新 Release，也不转做其他里程碑。
+
+
+## 2026-11-15 — 为 M14 提供公开可下载的测试预发布版
+
+- 用户无法使用先前会话附件/限期 Actions artifact，故按仓库现有 release-trigger workflow 准备 `v0.1.0-preview.5`，发布新的 self-contained win-x64 ZIP 与 SHA256 sidecar，便于实际 Windows 10/11 测试。
+- 此为测试预发布版，不是稳定版 1.0.0；旧 `v0.1.0-preview.4` Release 与资产不覆盖。应用自动化通过与实机验收分开记录。
+- M14 实机结果在用户设备执行前仍为 **NOT RUN**；下一步下载 Release 包、校验完整性并按 ACCEPTANCE-TEST-CN.md 执行。
