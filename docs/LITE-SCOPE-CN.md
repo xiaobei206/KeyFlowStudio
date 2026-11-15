@@ -1,6 +1,6 @@
-# Mouscript Lite 1.0.0 范围冻结
+# KeyFlow Lite 1.0.0 范围冻结
 
-- 产品：Mouscript Lite
+- 产品：KeyFlow Lite
 - 版本：1.0.0
 - 源码基线：v0.1.0-preview.4，原始发布提交 08886d9e66c08ba24f6f1b7d9e91bbdaeba8a9e0
 - 代码线：release/lite-1.0.0

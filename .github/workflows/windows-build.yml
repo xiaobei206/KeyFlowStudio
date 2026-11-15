@@ -43,10 +43,10 @@ jobs:
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
-          name: MouscriptLite-release-win-x64
+          name: KeyFlowLite-release-win-x64
           path: |
-            artifacts/MouscriptLite-*.zip
-            artifacts/MouscriptLite-*.zip.sha256
+            artifacts/KeyFlowLite-*.zip
+            artifacts/KeyFlowLite-*.zip.sha256
           if-no-files-found: error
           retention-days: 30
       - name: Read release version
@@ -60,22 +60,6 @@ jobs:
           Add-Content -Path $env:GITHUB_OUTPUT -Value "version=$version" -Encoding utf8
           Add-Content -Path $env:GITHUB_OUTPUT -Value "product_name=$productName" -Encoding utf8
           Add-Content -Path $env:GITHUB_OUTPUT -Value "product_id=$productId" -Encoding utf8
-      - name: Retarget v1.0.0 and replace previous product branding
-        if: github.event_name == 'push' && startsWith(github.event.head_commit.message, 'release:')
-        shell: pwsh
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          $version = (Get-Content VERSION -Raw).Trim()
-          $productName = (Get-Content PRODUCT_NAME -Raw).Trim()
-          if ($version -eq "1.0.0") {
-            $tag = "v$version"
-            git tag --force $tag $env:GITHUB_SHA
-            git push --force origin "refs/tags/$tag"
-            gh release edit $tag --title "$productName v$version" --repo $env:GITHUB_REPOSITORY
-            gh release delete-asset $tag "KeyFlowLite-1.0.0-win-x64.zip" --yes --repo $env:GITHUB_REPOSITORY
-            gh release delete-asset $tag "KeyFlowLite-1.0.0-win-x64.zip.sha256" --yes --repo $env:GITHUB_REPOSITORY
-          }
       - name: Create GitHub Release
         if: github.event_name == 'push' && startsWith(github.event.head_commit.message, 'release:')
         uses: softprops/action-gh-release@v2

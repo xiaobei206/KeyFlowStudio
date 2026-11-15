@@ -1,12 +1,12 @@
-# Mouscript Lite
+# KeyFlow Lite
 
-Mouscript Lite 1.0.0 是一款面向 Windows 10/11 x64 的轻量桌面自动化工具，使用 WinForms、.NET 10 与 Lua 5.4。
+KeyFlow Lite 1.0.0 是一款面向 Windows 10/11 x64 的轻量桌面自动化工具，使用 WinForms、.NET 10 与 Lua 5.4。
 
 ## 下载
 
-- Mouscript Lite 1.0.0 Release：https://github.com/xiaobei206/anjian/releases/tag/v1.0.0
-- Windows x64 ZIP：MouscriptLite-1.0.0-win-x64.zip
-- SHA-256 sidecar：MouscriptLite-1.0.0-win-x64.zip.sha256
+- KeyFlow Lite 1.0.0 Release：https://github.com/xiaobei206/anjian/releases/tag/v1.0.0
+- Windows x64 ZIP：KeyFlowLite-1.0.0-win-x64.zip
+- SHA-256 sidecar：KeyFlowLite-1.0.0-win-x64.zip.sha256
 
 下载 ZIP 后先核对同目录 SHA-256 文件，再完整解压并运行 Anjian.App.exe。不要从 ZIP 中单独取出 EXE；运行时必须保留全部伴随文件。
 
@@ -33,7 +33,7 @@ Mouscript Lite 1.0.0 是一款面向 Windows 10/11 x64 的轻量桌面自动化�
     RightClick(50)
     KeyPress("ENTER")
     Hotkey("CTRL", "SHIFT", "S")
-    TypeText("Mouscript Lite")
+    TypeText("KeyFlow Lite")
     Delay(500)
     Log("本轮完成")
 
@@ -41,7 +41,7 @@ Mouscript Lite 1.0.0 是一款面向 Windows 10/11 x64 的轻量桌面自动化�
 
 ## 当前限制
 
-Lite 1.0.0 冻结于原 v0.1.0-preview.4 功能基线。它不包含主线后续增加的增强 IDE/调试器、图像资源管理、OCR、参数设计器、小精灵打包、插件、定时任务和多实例管理。上述能力不属于 Lite 1.0.0 的范围；后续完整产品在 Mouscript Studio 主线单独演进。
+Lite 1.0.0 冻结于原 v0.1.0-preview.4 功能基线。它不包含主线后续增加的增强 IDE/调试器、图像资源管理、OCR、参数设计器、小精灵打包、插件、定时任务和多实例管理。上述能力不属于 Lite 1.0.0 的范围；后续完整产品在 KeyFlow Studio 主线单独演进。
 
 本次 Windows CI 能验证构建、测试与发布包生成，但不替代 Windows 10/11 实机测试。低级输入 Hook、DPI、多显示器、目标程序权限、托盘和长时间稳定性仍应在目标设备上验证。
 
