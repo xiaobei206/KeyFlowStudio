@@ -24,6 +24,8 @@ internal sealed class ImageResourceManagerForm : Form
         StartPosition = FormStartPosition.CenterParent;
         MinimumSize = new Size(900, 560);
         Size = new Size(1100, 680);
+        AutoScaleMode = AutoScaleMode.Dpi;
+        AutoScaleDimensions = new SizeF(96F, 96F);
         Font = new Font("Microsoft YaHei UI", 9F);
         BuildUi();
         RefreshResources();
@@ -44,7 +46,17 @@ internal sealed class ImageResourceManagerForm : Form
 
         var split = new SplitContainer
         {
-            Dock = DockStyle.Fill, SplitterDistance = 670, Panel1MinSize = 420, Panel2MinSize = 220
+            Dock = DockStyle.Fill,
+            Size = new Size(1100, 580),
+            Panel1MinSize = 360,
+            Panel2MinSize = 220,
+            SplitterDistance = 640
+        };
+        split.SizeChanged += (_, _) =>
+        {
+            var maximum = split.Width - split.Panel2MinSize - split.SplitterWidth;
+            if (maximum >= split.Panel1MinSize)
+                split.SplitterDistance = Math.Clamp(split.SplitterDistance, split.Panel1MinSize, maximum);
         };
         _grid.Dock = DockStyle.Fill;
         _grid.ReadOnly = true;

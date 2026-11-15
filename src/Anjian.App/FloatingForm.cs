@@ -37,14 +37,16 @@ internal sealed class FloatingForm : Form
 
     public FloatingForm(Icon icon)
     {
-        Text = "按键精灵 2026";
+        Text = "KeyFlow Studio";
         Icon = icon;
         FormBorderStyle = FormBorderStyle.None;
+        AutoScaleMode = AutoScaleMode.Dpi;
+        AutoScaleDimensions = new SizeF(96F, 96F);
         ShowInTaskbar = false;
         StartPosition = FormStartPosition.Manual;
-        ClientSize = new Size(660, 142);
-        MinimumSize = new Size(660, 142);
-        MaximumSize = new Size(660, 142);
+        ClientSize = new Size(640, 124);
+        MinimumSize = new Size(640, 124);
+        MaximumSize = new Size(640, 124);
         BackColor = Color.FromArgb(245, 247, 250);
         Font = new Font("Microsoft YaHei UI", 9F);
         BuildUi();
@@ -74,7 +76,7 @@ internal sealed class FloatingForm : Form
         };
         root.RowStyles.Add(new RowStyle(SizeType.Absolute, 31));
         root.RowStyles.Add(new RowStyle(SizeType.Absolute, 39));
-        root.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
+        root.RowStyles.Add(new RowStyle(SizeType.Absolute, 42));
 
         var header = new FlowLayoutPanel
         {
@@ -86,14 +88,14 @@ internal sealed class FloatingForm : Form
         };
         var brand = new Label
         {
-            Text = "按键精灵 2026",
+            Text = "KeyFlow Studio",
             AutoSize = true,
             Font = new Font("Microsoft YaHei UI", 10F, FontStyle.Bold),
             ForeColor = Color.FromArgb(28, 50, 82),
             Margin = new Padding(1, 4, 12, 0)
         };
         _scriptLabel.AutoSize = false;
-        _scriptLabel.Width = 165;
+        _scriptLabel.Width = 155;
         _scriptLabel.Height = 26;
         _scriptLabel.AutoEllipsis = true;
         _scriptLabel.Text = "脚本：未选择";

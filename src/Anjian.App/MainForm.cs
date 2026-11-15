@@ -71,7 +71,7 @@ internal sealed class MainForm : Form
     private bool _refreshingScripts;
     private bool _suppressTabSelection;
     private VisualDebugOverlayForm? _visualDebugOverlay;
-    private Button? _visualDebugButton;
+    private ToolStripMenuItem? _visualDebugMenuItem;
     private RunInstanceManagerForm? _runInstanceManager;
 
     private sealed class ScriptTab(ScriptEntry entry, TabPage page, LuaEditorControl editor)
@@ -88,7 +88,7 @@ internal sealed class MainForm : Form
 
     public MainForm()
     {
-        Text = "按键精灵 2026";
+        Text = "KeyFlow Studio";
         MinimumSize = new Size(980, 650);
         Size = new Size(1180, 780);
         StartPosition = FormStartPosition.CenterScreen;
@@ -157,18 +157,91 @@ internal sealed class MainForm : Form
 
     private void BuildUi()
     {
-        var toolbar = new FlowLayoutPanel
+        var topBar = new TableLayoutPanel
         {
             Dock = DockStyle.Top,
-            Height = 48,
-            Padding = new Padding(8, 7, 8, 5),
-            FlowDirection = FlowDirection.LeftToRight,
-            WrapContents = false,
-            AutoScroll = true
+            Height = 112,
+            ColumnCount = 1,
+            RowCount = 3,
+            Margin = Padding.Empty,
+            Padding = Padding.Empty
+        };
+        topBar.RowStyles.Add(new RowStyle(SizeType.Absolute, 26));
+        topBar.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
+        topBar.RowStyles.Add(new RowStyle(SizeType.Absolute, 46));
+
+        var menuStrip = new MenuStrip
+        {
+            Dock = DockStyle.Fill,
+            GripStyle = ToolStripGripStyle.Hidden,
+            Padding = new Padding(8, 2, 0, 2)
         };
 
+        ToolStripMenuItem CreateMenu(string text)
+        {
+            var menu = new ToolStripMenuItem(text);
+            menuStrip.Items.Add(menu);
+            return menu;
+        }
+
+        var fileMenu = CreateMenu("文件");
+        AddMenuItem(fileMenu, "新建脚本", CreateScript);
+        AddMenuItem(fileMenu, "保存当前脚本", () => SaveCurrent());
+        fileMenu.DropDownItems.Add(new ToolStripSeparator());
+        AddMenuItem(fileMenu, "关闭当前标签", CloseCurrentTab);
+
+        var editMenu = CreateMenu("编辑");
+        AddMenuItem(editMenu, "查找 / 替换", ShowSearchReplace);
+        AddMenuItem(editMenu, "检查语法", () => _ = CheckCurrentSyntaxAsync());
+
+        var recordMenu = CreateMenu("录制");
+        AddMenuItem(recordMenu, "开始 / 暂停 / 继续录制", ToggleRecording);
+        AddMenuItem(recordMenu, "结束录制", StopRecording);
+        AddMenuItem(recordMenu, "打开动作列表", OpenRecorderActionList);
+
+        var runMenu = CreateMenu("运行");
+        AddMenuItem(runMenu, "播放", () => _ = StartPlaybackAsync());
+        AddMenuItem(runMenu, "暂停 / 继续", TogglePause);
+        AddMenuItem(runMenu, "停止", () => _ = StopPlaybackAsync());
+        runMenu.DropDownItems.Add(new ToolStripSeparator());
+        AddMenuItem(runMenu, "运行实例管理", OpenRunInstanceManager);
+        AddMenuItem(runMenu, "定时任务", OpenScheduledTasks);
+        AddMenuItem(runMenu, "键鼠状态恢复", RecoverInputAfterManualCheck);
+
+        var debugMenu = CreateMenu("调试");
+        AddMenuItem(debugMenu, "启动调试", () => _ = StartDebugAsync());
+        AddMenuItem(debugMenu, "继续", () => SubmitDebugCommand(LuaDebugCommand.Continue));
+        AddMenuItem(debugMenu, "单步进入", () => SubmitDebugCommand(LuaDebugCommand.StepInto));
+        AddMenuItem(debugMenu, "单步越过", () => SubmitDebugCommand(LuaDebugCommand.StepOver));
+        AddMenuItem(debugMenu, "单步跳出", () => SubmitDebugCommand(LuaDebugCommand.StepOut));
+        AddMenuItem(debugMenu, "运行到光标", RunToCursor);
+
+        var resourceMenu = CreateMenu("资源");
+        AddMenuItem(resourceMenu, "图像资源", OpenImageResources);
+        AddMenuItem(resourceMenu, "OCR 模型", OpenOcrModelManager);
+        AddMenuItem(resourceMenu, "参数定义", OpenParameterDesigner);
+
+        var toolsMenu = CreateMenu("工具");
+        AddMenuItem(toolsMenu, "小精灵打包", OpenSpritePackager);
+        AddMenuItem(toolsMenu, "插件管理", OpenPluginManager);
+        AddMenuItem(toolsMenu, "API 命令面板", OpenApiCommandPalette);
+        _visualDebugMenuItem = AddMenuItem(toolsMenu, "视觉调试：关闭", ToggleVisualDebug);
+
+        var windowMenu = CreateMenu("窗口");
+        AddMenuItem(windowMenu, "返回悬浮窗", () => HideMainWindow(showFloatingWindow: true));
+
+        var toolbar = new FlowLayoutPanel
+        {
+            Dock = DockStyle.Fill,
+            Padding = new Padding(8, 4, 8, 2),
+            FlowDirection = FlowDirection.LeftToRight,
+            WrapContents = false,
+            AutoScroll = true,
+            Margin = Padding.Empty
+        };
         toolbar.Controls.Add(MakeButton("新建脚本", (_, _) => CreateScript()));
         toolbar.Controls.Add(MakeButton("保存", (_, _) => SaveCurrent()));
+
         _recordButton.Text = "开始录制";
         _recordButton.Click += (_, _) => ToggleRecording();
         toolbar.Controls.Add(_recordButton);
@@ -177,6 +250,7 @@ internal sealed class MainForm : Form
         _stopRecordButton.Enabled = false;
         _stopRecordButton.Click += (_, _) => StopRecording();
         toolbar.Controls.Add(_stopRecordButton);
+
         _actionEditorButton.Text = "动作列表";
         _actionEditorButton.Enabled = false;
         _actionEditorButton.Click += (_, _) => OpenRecorderActionList();
@@ -185,8 +259,6 @@ internal sealed class MainForm : Form
         _playButton.Text = "▶ 播放";
         _playButton.Click += async (_, _) => await StartPlaybackAsync();
         toolbar.Controls.Add(_playButton);
-        toolbar.Controls.Add(MakeButton("运行实例", (_, _) => OpenRunInstanceManager()));
-        toolbar.Controls.Add(MakeButton("定时任务", (_, _) => OpenScheduledTasks()));
 
         _pauseButton.Text = "暂停";
         _pauseButton.Enabled = false;
@@ -197,83 +269,59 @@ internal sealed class MainForm : Form
         _stopButton.Enabled = false;
         _stopButton.Click += async (_, _) => await StopPlaybackAsync();
         toolbar.Controls.Add(_stopButton);
+
         _recoverInputButton.Click += (_, _) => RecoverInputAfterManualCheck();
         toolbar.Controls.Add(_recoverInputButton);
-        toolbar.Controls.Add(MakeButton("查找/替换", (_, _) => ShowSearchReplace()));
-        toolbar.Controls.Add(MakeButton("检查语法", async (_, _) => await CheckCurrentSyntaxAsync()));
-        toolbar.Controls.Add(MakeButton("关闭标签", (_, _) => CloseCurrentTab()));
 
-        _debugStartButton.Text = "启动调试";
-        _debugStartButton.Click += async (_, _) => await StartDebugAsync();
-        toolbar.Controls.Add(_debugStartButton);
-        _debugContinueButton.Text = "继续";
-        _debugContinueButton.Enabled = false;
-        _debugContinueButton.Click += (_, _) => SubmitDebugCommand(LuaDebugCommand.Continue);
-        toolbar.Controls.Add(_debugContinueButton);
-        _debugStepIntoButton.Text = "单步进入";
-        _debugStepIntoButton.Enabled = false;
-        _debugStepIntoButton.Click += (_, _) => SubmitDebugCommand(LuaDebugCommand.StepInto);
-        toolbar.Controls.Add(_debugStepIntoButton);
-        _debugStepOverButton.Text = "单步越过";
-        _debugStepOverButton.Enabled = false;
-        _debugStepOverButton.Click += (_, _) => SubmitDebugCommand(LuaDebugCommand.StepOver);
-        toolbar.Controls.Add(_debugStepOverButton);
-        _debugStepOutButton.Text = "单步跳出";
-        _debugStepOutButton.Enabled = false;
-        _debugStepOutButton.Click += (_, _) => SubmitDebugCommand(LuaDebugCommand.StepOut);
-        toolbar.Controls.Add(_debugStepOutButton);
-        _debugRunToCursorButton.Text = "运行到光标";
-        _debugRunToCursorButton.Enabled = false;
-        _debugRunToCursorButton.Click += (_, _) => RunToCursor();
-        toolbar.Controls.Add(_debugRunToCursorButton);
-
-        toolbar.Controls.Add(new Label { Text = "重复次数", AutoSize = true, Margin = new Padding(12, 8, 2, 0) });
+        var settingsBar = new FlowLayoutPanel
+        {
+            Dock = DockStyle.Fill,
+            Padding = new Padding(8, 6, 8, 2),
+            FlowDirection = FlowDirection.LeftToRight,
+            WrapContents = false,
+            AutoScroll = true,
+            Margin = Padding.Empty
+        };
+        settingsBar.Controls.Add(new Label { Text = "重复次数", AutoSize = true, Margin = new Padding(2, 7, 2, 0) });
         _repeatCount.Minimum = 0;
         _repeatCount.Maximum = PlaybackOptions.MaximumRepeatCount;
-        _repeatCount.Width = 82;
+        _repeatCount.Width = 76;
         _repeatCount.Margin = new Padding(0, 1, 2, 0);
-        toolbar.Controls.Add(_repeatCount);
-        toolbar.Controls.Add(new Label { Text = "0=无限", AutoSize = true, Margin = new Padding(1, 8, 8, 0) });
+        settingsBar.Controls.Add(_repeatCount);
+        settingsBar.Controls.Add(new Label { Text = "0=无限", AutoSize = true, Margin = new Padding(1, 7, 8, 0) });
 
-        toolbar.Controls.Add(new Label { Text = "每轮间隔(ms)", AutoSize = true, Margin = new Padding(5, 8, 2, 0) });
+        settingsBar.Controls.Add(new Label { Text = "轮间隔(ms)", AutoSize = true, Margin = new Padding(2, 7, 2, 0) });
         _repeatInterval.Minimum = 0;
         _repeatInterval.Maximum = PlaybackOptions.MaximumIntervalMilliseconds;
         _repeatInterval.Increment = 100;
-        _repeatInterval.Width = 88;
-        _repeatInterval.Margin = new Padding(0, 1, 2, 0);
-        toolbar.Controls.Add(_repeatInterval);
-        toolbar.Controls.Add(new Label
-        {
-            Text = "超时(分钟，0=关闭)",
-            AutoSize = true,
-            Margin = new Padding(8, 8, 2, 0)
-        });
+        _repeatInterval.Width = 84;
+        _repeatInterval.Margin = new Padding(0, 1, 6, 0);
+        settingsBar.Controls.Add(_repeatInterval);
+
+        settingsBar.Controls.Add(new Label { Text = "超时(分钟)", AutoSize = true, Margin = new Padding(2, 7, 2, 0) });
         _runtimeTimeoutMinutes.Minimum = 0;
         _runtimeTimeoutMinutes.Maximum = 10_080;
-        _runtimeTimeoutMinutes.Width = 72;
+        _runtimeTimeoutMinutes.Width = 68;
+        _runtimeTimeoutMinutes.Margin = new Padding(0, 1, 8, 0);
         _runtimeTimeoutMinutes.ValueChanged += (_, _) => SaveSettings();
-        toolbar.Controls.Add(_runtimeTimeoutMinutes);
-        toolbar.Controls.Add(new Label
+        settingsBar.Controls.Add(_runtimeTimeoutMinutes);
+
+        _clickOnlyCheck.Margin = new Padding(2, 6, 4, 0);
+        settingsBar.Controls.Add(_clickOnlyCheck);
+        _alwaysOnTopCheck.Margin = new Padding(2, 6, 4, 0);
+        settingsBar.Controls.Add(_alwaysOnTopCheck);
+        settingsBar.Controls.Add(new Label
         {
-            Text = "全局热键：F10 播放 / F11 暂停继续 / F12 中止",
+            Text = "F10 播放 · F11 暂停/继续 · F12 中止",
             AutoSize = true,
             ForeColor = Color.FromArgb(70, 90, 110),
-            Margin = new Padding(12, 8, 8, 0)
+            Margin = new Padding(8, 7, 4, 0)
         });
-        _clickOnlyCheck.Margin = new Padding(10, 7, 4, 0);
-        toolbar.Controls.Add(_clickOnlyCheck);
-        _alwaysOnTopCheck.Margin = new Padding(4, 7, 4, 0);
-        toolbar.Controls.Add(_alwaysOnTopCheck);
-        toolbar.Controls.Add(MakeButton("图像资源", (_, _) => OpenImageResources()));
-        toolbar.Controls.Add(MakeButton("OCR 模型", (_, _) => OpenOcrModelManager()));
-        toolbar.Controls.Add(MakeButton("参数定义", (_, _) => OpenParameterDesigner()));
-        toolbar.Controls.Add(MakeButton("小精灵打包", (_, _) => OpenSpritePackager()));
-        toolbar.Controls.Add(MakeButton("插件管理", (_, _) => OpenPluginManager()));
-        toolbar.Controls.Add(MakeButton("API 命令面板", (_, _) => OpenApiCommandPalette()));
-        _visualDebugButton = MakeButton("视觉调试：关", (_, _) => ToggleVisualDebug());
-        toolbar.Controls.Add(_visualDebugButton);
-        toolbar.Controls.Add(MakeButton("返回悬浮窗", (_, _) => HideMainWindow(showFloatingWindow: true)));
-        _fullModePanel.Controls.Add(toolbar);
+
+        topBar.Controls.Add(menuStrip, 0, 0);
+        topBar.Controls.Add(toolbar, 0, 1);
+        topBar.Controls.Add(settingsBar, 0, 2);
+        _fullModePanel.Controls.Add(topBar);
 
         var split = new SplitContainer
         {
@@ -433,6 +481,14 @@ internal sealed class MainForm : Form
         };
     }
 
+    private static ToolStripMenuItem AddMenuItem(ToolStripMenuItem parent, string text, Action action)
+    {
+        var item = new ToolStripMenuItem(text);
+        item.Click += (_, _) => action();
+        parent.DropDownItems.Add(item);
+        return item;
+    }
+
     private static Button MakeButton(string text, EventHandler handler)
     {
         var button = new Button
@@ -493,12 +549,12 @@ internal sealed class MainForm : Form
         trayMenu.Items.Add("显示悬浮窗", null, (_, _) => ShowFloatingWindow());
         trayMenu.Items.Add("隐藏悬浮窗", null, (_, _) => HideFloatingWindow());
         trayMenu.Items.Add(new ToolStripSeparator());
-        trayMenu.Items.Add("退出按键精灵 2026", null, (_, _) => ExitApplication());
+        trayMenu.Items.Add("退出KeyFlow Studio", null, (_, _) => ExitApplication());
 
         _trayIcon = new NotifyIcon
         {
             Icon = (Icon)_applicationIcon.Clone(),
-            Text = "按键精灵 2026",
+            Text = "KeyFlow Studio",
             ContextMenuStrip = trayMenu,
             Visible = true
         };
@@ -956,7 +1012,7 @@ internal sealed class MainForm : Form
         }
         catch (Exception ex)
         {
-            MessageBox.Show(this, "保存失败：" + ex.Message, "按键精灵 2026", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(this, "保存失败：" + ex.Message, "KeyFlow Studio", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return false;
         }
     }
@@ -1908,7 +1964,11 @@ internal sealed class MainForm : Form
         {
             _visualDebugOverlay ??= new VisualDebugOverlayForm();
             _visualDebugOverlay.ShowOverlay();
-            _visualDebugButton!.Text = "视觉调试：开";
+            if (_visualDebugMenuItem is not null)
+            {
+                _visualDebugMenuItem.Checked = true;
+                _visualDebugMenuItem.Text = "视觉调试：已开启";
+            }
             AppendLog("视觉调试已开启；标注层为点击穿透窗口，关闭后不占用输入。");
             if (!_visualDebugOverlay.CaptureExclusionSupported)
                 AppendLog("警告：Windows 未确认覆盖层截图排除成功；截图可能包含标注层，请在本机验收确认。");
@@ -1916,7 +1976,11 @@ internal sealed class MainForm : Form
         else
         {
             _visualDebugOverlay?.HideOverlay();
-            _visualDebugButton!.Text = "视觉调试：关";
+            if (_visualDebugMenuItem is not null)
+            {
+                _visualDebugMenuItem.Checked = false;
+                _visualDebugMenuItem.Text = "视觉调试：关闭";
+            }
             AppendLog("视觉调试已关闭。");
         }
     }
@@ -1931,7 +1995,7 @@ internal sealed class MainForm : Form
 
     private void UpdateTitle()
     {
-        Text = $"按键精灵 2026 · {(_current?.Name ?? "未选择脚本")}{(_dirty ? " *" : "")}";
+        Text = $"KeyFlow Studio · {(_current?.Name ?? "未选择脚本")}{(_dirty ? " *" : "")}";
         if (_activeTab is not null)
             _activeTab.Page.Text = _activeTab.Entry.Name + (_activeTab.Dirty ? " *" : string.Empty);
         UpdateFloatingState();

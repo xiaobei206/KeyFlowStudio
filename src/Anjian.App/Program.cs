@@ -19,6 +19,8 @@ internal static class Program
             return MultiInstanceSmokeTestRunner.Run();
         if (args.Length > 0 && args[0].Equals("--run-instance-monitor-smoke-test", StringComparison.OrdinalIgnoreCase))
             return RunInstanceMonitorSmokeTestRunner.Run();
+        if (args.Length > 0 && args[0].Equals("--image-resource-ui-smoke-test", StringComparison.OrdinalIgnoreCase))
+            return ImageResourceUiSmokeTestRunner.Run();
 
         ApplicationConfiguration.Initialize();
         if (args.Length > 0 && args[0].Equals("--automation-probe", StringComparison.OrdinalIgnoreCase))
@@ -37,7 +39,7 @@ internal static class Program
                     {
                         MessageBox.Show("小精灵包校验失败，脚本不会启动：" + Environment.NewLine +
                             string.Join(Environment.NewLine, issues.Take(20)),
-                            "按键精灵 2026", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            "KeyFlow Studio", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return 2;
                     }
                     Application.Run(new SpriteLauncherForm(spriteManifest));
@@ -45,7 +47,7 @@ internal static class Program
                 catch (Exception ex)
                 {
                     MessageBox.Show("小精灵包检查失败，脚本不会启动：" + Environment.NewLine + ex.Message,
-                        "按键精灵 2026", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        "KeyFlow Studio", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return 2;
                 }
             }
