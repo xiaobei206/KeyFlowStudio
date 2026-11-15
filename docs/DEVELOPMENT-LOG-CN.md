@@ -976,22 +976,22 @@ M13-04 已结束；唯一下一任务为 M14：集中执行 Windows 10/11 桌面
 - 该版本是为解决实机测试包下载阻塞而生成的 **prerelease**，不代表 M14 实机验收完成。实际键鼠、WinForms、DPI/多屏、权限弹窗、托盘/退出与长时稳定性在用户 Windows 10/11 机器执行前继续 NOT RUN。
 
 
-## 2026-11-15 — Mouscript Studio preview.6 UI 修复与 Mouscript Lite 1.0.0 分线
+## 2026-11-15 — KeyFlow Studio preview.6 UI 修复与 Mouscript Lite 1.0.0 分线
 
 - 用户实测 preview.5 发现“图像资源”窗口打开时立即抛出 `SplitterDistance` 范围异常。主线对图像资源 SplitContainer 明确设置初始尺寸、Panel 最小尺寸和安全分割距离，并在窗口尺寸变化时钳制合法范围；窗口改为 DPI-aware。
 - 主窗口把超长工具栏改为“文件 / 编辑 / 录制 / 运行 / 调试 / 资源 / 工具 / 窗口”分类菜单，首页仅保留高频命令和精简设置行。
 - 悬浮窗由固定 660×142 调整为 640×124 逻辑像素，使用 DPI 自动缩放并收紧行布局，保留无边框悬浮行为。
 - 新增 Windows CI 的 Image Resource Manager WinForms 启动/布局 smoke：空脚本、空资源状态实例化窗口并执行 layout。首轮暴露 PowerShell 对 GUI 进程 `$LASTEXITCODE` 读取不可靠，改为 `Start-Process -PassThru` 并捕获 stdout/stderr 后，run [43725921665](https://github.com/xiaobei206/anjian/actions/runs/43725921665) 对修复 HEAD `edd9311c93a92aac81c9e91dc27a6d1ed48f5c82` 全 PASS：Build 0 warnings/errors、228/228 Core tests、API handbook、publish、UI smoke、Worker smoke。
 - Lite 从 preview.4 原始 commit `08886d9e66c08ba24f6f1b7d9e91bbdaeba8a9e0` 建立独立分支 `release/lite-1.0.0`，仅调整品牌、版本/包名与悬浮窗 640×124 DPI 布局，不引入 preview.5 及 main 后续功能。Lite v1.0.0 发布 workflow 成功（后续品牌重命名后的 Release 资产以最新 API 核验为准）。
-- 产品名初步筛查后选用 Mouscript Studio / Mouscript Lite；仓库 `xiaobei206/anjian`、内部 EXE 名与 `%LOCALAPPDATA%\\Anjian2026` 用户数据路径维持兼容。
+- 产品名初步筛查后选用 KeyFlow Studio / Mouscript Lite；仓库 `xiaobei206/anjian`、内部 EXE 名与 `%LOCALAPPDATA%\\Anjian2026` 用户数据路径维持兼容。
 - 所有 CI PASS 只代表自动化；用户 Windows 10/11 真机测试仍单独记录，不能用 smoke 覆盖完整 M14。
 
-## 2026-11-15 — Mouscript Studio v0.1.0-preview.6 / Mouscript Lite v1.0.0 最终发布核验
+## 2026-11-15 — KeyFlow Studio v0.1.0-preview.6 / Mouscript Lite v1.0.0 最终发布核验
 
-### Mouscript Studio v0.1.0-preview.6
+### KeyFlow Studio v0.1.0-preview.6
 - Release：https://github.com/xiaobei206/anjian/releases/tag/v0.1.0-preview.6（Release ID `446132794`，prerelease=true）。
 - 发布 commit：`f5511306c0c87fa08a7c0e08677d6ccc77a4c9d1`；Windows Actions run [43726469737](https://github.com/xiaobei206/anjian/actions/runs/43726469737) SUCCESS。
-- ZIP：`MouscriptStudio-0.1.0-preview.6-win-x64.zip`，87,639,119 bytes；GitHub Release asset SHA256 `dc34931ec3735b4ebbaff7637a26d2b32c2039cceee9fe5fdb53dcf4f343c6bb`。Sidecar 同步上传。
+- ZIP：`KeyFlowStudio-0.1.0-preview.6-win-x64.zip`，87,639,119 bytes；GitHub Release asset SHA256 `dc34931ec3735b4ebbaff7637a26d2b32c2039cceee9fe5fdb53dcf4f343c6bb`。Sidecar 同步上传。
 - 全流程 PASS：Restore、Release Build（0 warnings / 0 errors）、Core tests 228/228、API handbook check、self-contained win-x64 publish、Image Resource Manager WinForms startup/layout smoke、packaged Sprite/Worker smoke、ZIP/SHA、artifact upload、Release creation。
 
 ### Mouscript Lite v1.0.0
@@ -1002,4 +1002,11 @@ M13-04 已结束；唯一下一任务为 M14：集中执行 Windows 10/11 桌面
 
 ### 验收边界
 - preview.6 CI 中图像资源窗体空状态 smoke 通过；这验证窗体初始化/布局，不等于真实用户桌面手工验收。
-- Mouscript Lite 与 Mouscript Studio 的 Windows 10/11 真机键鼠、DPI/多屏、托盘/退出、权限行为与长时间稳定性，在用户设备取得日志/截图以前均继续 NOT RUN。
+- Mouscript Lite 与 KeyFlow Studio 的 Windows 10/11 真机键鼠、DPI/多屏、托盘/退出、权限行为与长时间稳定性，在用户设备取得日志/截图以前均继续 NOT RUN。
+
+## 2026-11-15 — 完整产品品牌调整为 KeyFlow Studio
+
+- 用户明确指定完整产品仓库名为 KeyFlowStudio，轻量版独立仓库为 KeyFlowStudioLite。
+- 完整产品主线 PRODUCT_NAME / PRODUCT_ID 和 WinForms 窗口、托盘、错误提示文案统一切换到 KeyFlow Studio / KeyFlowStudio。
+- 旧 preview.6 Release 的历史资产和文件名保留；用户已下载当前版本，下一版本按新的产品包名发布。
+- GitHub 连接未提供仓库 rename 管理接口；代码和文档已按目标仓库名准备，实际将旧 slug anjian 改为 KeyFlowStudio 需要在 GitHub Settings > General 手工执行。

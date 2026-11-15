@@ -1,19 +1,24 @@
 # 当前会话交接
 
-## 当前状态
-- 完整产品：Mouscript Studio（Windows 键鼠自动化与 Lua 脚本开发环境）。
-- 独立轻量版：Mouscript Lite 1.0.0。
-- 仓库：xiaobei206/anjian；完整开发主线：main；Lite 冻结分支：release/lite-1.0.0。
-- 最新完整版本：v0.1.0-preview.6（Windows x64 prerelease），Release ID `446132794`。
-- 完整版 Release：https://github.com/xiaobei206/anjian/releases/tag/v0.1.0-preview.6
-- 完整版 ZIP：`MouscriptStudio-0.1.0-preview.6-win-x64.zip`，87,639,119 bytes；SHA256 `dc34931ec3735b4ebbaff7637a26d2b32c2039cceee9fe5fdb53dcf4f343c6bb`。
-- 完整版发布 commit：`f5511306c0c87fa08a7c0e08677d6ccc77a4c9d1`；Windows Actions run [43726469737](https://github.com/xiaobei206/anjian/actions/runs/43726469737) SUCCESS。Restore/Build、228/228 Core tests、0 warnings/0 errors、API handbook、self-contained publish、Image Resource Manager UI startup/layout smoke、packaged Worker smoke、ZIP/SHA 与 Release 创建全 PASS。
-- Lite 稳定版：v1.0.0（非 prerelease），Release ID `446127849`；Release：https://github.com/xiaobei206/anjian/releases/tag/v1.0.0
-- Lite ZIP：`MouscriptLite-1.0.0-win-x64.zip`，51,911,007 bytes；SHA256 `ffab0dd7382a927949f405b5daf39b35a490c03539e17b507f4f5cbb286c0eb2`。
-- Lite 发布 commit / v1.0.0 tag target：`9e2f8d8528f34468dd0423262da6ebe56d572de6`；Windows Actions run [43726550455](https://github.com/xiaobei206/anjian/actions/runs/43726550455) SUCCESS。Restore/Build、7/7 Core tests、0 warnings/0 errors、自包含发布、ZIP/SHA、旧 `KeyFlowLite` 资产清理与 Release 名称更新全 PASS。
-- Lite 源码基线为 v0.1.0-preview.4 原始提交 `08886d9e66c08ba24f6f1b7d9e91bbdaeba8a9e0`，独立分支不接收 main 后续开发功能。
-- 历史 v0.1.0-preview.4 与 preview.5 Release 保留；preview.5 仍作为历史 M14 测试包。
-- **实机验收边界：** Windows Actions/WinForms smoke 不能代替用户 Windows 10/11 桌面的真实键鼠、DPI/多屏、托盘/退出、权限弹窗和长时稳定性验收；M14 设备实测在取得证据前继续 NOT RUN。
+## 当前身份与仓库
+- 完整产品：KeyFlow Studio（Windows 键鼠自动化与 Lua 脚本开发环境）。
+- 完整产品预期仓库地址：<https://github.com/xiaobei206/KeyFlowStudio>。
+- 当前旧仓库 slug：`xiaobei206/anjian`；代码/产品品牌已调整，仓库重命名仍待 GitHub Settings 手工执行（本会话 GitHub 连接只开放仓库内容和常规 Git 数据操作，没有仓库改名管理接口）。
+- 独立轻量版：KeyFlow Studio Lite；仓库：<https://github.com/xiaobei206/KeyFlowStudioLite>；稳定版 `v1.0.0`。
+- 完整产品主线：`main`；当前代码版本仍为 `0.1.0-preview.6`。
+- 历史 preview.6 Release 和资产使用旧的 Mouscript 文件名；用户已保存下载包，后续新版本将使用 KeyFlow Studio 品牌与包名。
+- 完整产品基础源码 HEAD（本次 rebrand 前）：`60522fb29147f3b493d3c65363d648eb354d06bb`。本次品牌变更提交完成后，以 GitHub 当前 main HEAD 为准。
+- 完整产品功能主线继续保留图像资源、OCR、参数 UI、小精灵、插件和多实例等已开发能力；Lite 不吸收这些完整产品功能。
+- Lite 的源码独立迁移记录见 `KeyFlowStudioLite/docs/SOURCE-MIGRATION-CN.md`，后续会话只需 Lite 仓库地址即可接手。
+
+## 当前实机验收边界
+- GitHub Actions / WinForms 自动化烟测不代替 Windows 10/11 用户机器实测。
+- 键鼠 Hook、输入释放、DPI/多显示器、托盘/退出、权限和长时稳定性，没有真实设备证据前保持 `NOT RUN`。
+
+## 下一会话唯一任务
+- 继续完整 KeyFlow Studio 主线开发；开始前核对 main HEAD、Actions 和当前 Release，不依赖旧 SHA。
+- 用户目前已另建并使用 KeyFlow Studio Lite 独立仓库；不要将 Lite 源码再次合并回完整产品。
+
 
 ## 完整产品目标已冻结（2026-11-13）
 - 产品范围基线：[docs/PRD-CN.md](PRD-CN.md)。

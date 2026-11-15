@@ -4,7 +4,7 @@ internal static class ImageResourceUiSmokeTestRunner
 {
     public static int Run()
     {
-        var root = Path.Combine(Path.GetTempPath(), "MouscriptStudio-ImageResourceSmoke", Guid.NewGuid().ToString("N"));
+        var root = Path.Combine(Path.GetTempPath(), "KeyFlowStudio-ImageResourceSmoke", Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(root);
         var scriptPath = Path.Combine(root, "smoke.lua");
         File.WriteAllText(scriptPath, string.Empty);

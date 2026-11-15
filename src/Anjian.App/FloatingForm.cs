@@ -37,7 +37,7 @@ internal sealed class FloatingForm : Form
 
     public FloatingForm(Icon icon)
     {
-        Text = "Mouscript Studio";
+        Text = "KeyFlow Studio";
         Icon = icon;
         FormBorderStyle = FormBorderStyle.None;
         AutoScaleMode = AutoScaleMode.Dpi;
@@ -88,7 +88,7 @@ internal sealed class FloatingForm : Form
         };
         var brand = new Label
         {
-            Text = "Mouscript Studio",
+            Text = "KeyFlow Studio",
             AutoSize = true,
             Font = new Font("Microsoft YaHei UI", 10F, FontStyle.Bold),
             ForeColor = Color.FromArgb(28, 50, 82),
