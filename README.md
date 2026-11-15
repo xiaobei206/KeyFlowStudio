@@ -6,6 +6,25 @@ Windows 10/11 x64 键鼠自动化与 Lua 脚本开发环境，基于 WinForms、
 
 ### KeyFlow Studio（完整开发版）
 
+- 当前测试基线：v0.1.0-preview.6
+- 历史 Release 页面：https://github.com/xiaobei206/KeyFlowStudio/releases/tag/v0.1.0-preview.6
+- 该 Release 中的 ZIP 仍使用早期文件名 `MouscriptStudio-0.1.0-preview.6-win-x64.zip`；用户已保存此测试包，本仓库后续版本将按 `KeyFlowStudio` 命名。
+- preview.6 改进：图像资源窗口 SplitContainer 启动安全、分割宽度边界保护、分类下拉菜单、常用操作分行布局、640×124 DPI-aware 悬浮窗。
+- 已有 CI 证据：[run 43726469737](https://github.com/xiaobei206/KeyFlowStudio/actions/runs/43726469737) PASS：228/228 Core tests、0 build warnings/errors、API handbook、self-contained publish、Image Resource Manager UI smoke、packaged Worker smoke。
+
+### KeyFlow Studio Lite（独立仓库）
+
+- 稳定版：v1.0.0
+- Release：https://github.com/xiaobei206/KeyFlowStudioLite/releases/tag/v1.0.0
+- 新仓库迁移构建及发布状态以 [KeyFlowStudioLite Actions](https://github.com/xiaobei206/KeyFlowStudioLite/actions) 和对应 Release 资产为准。
+# KeyFlow Studio
+
+Windows 10/11 x64 键鼠自动化与 Lua 脚本开发环境，基于 WinForms、.NET 10 与 Lua 5.4。仓库名 `xiaobei206/KeyFlowStudio`（需在 GitHub Settings 完成改名）、内部 `Anjian.App.exe` 文件名和旧用户数据目录继续保留，以兼容历史脚本与配置。
+
+## 发布版本
+
+### KeyFlow Studio（完整开发版）
+
 - 当前测试版本：v0.1.0-preview.6
 - Release：https://github.com/xiaobei206/KeyFlowStudio/releases/tag/v0.1.0-preview.6
 - Windows x64 ZIP：https://github.com/xiaobei206/KeyFlowStudio/releases/download/v0.1.0-preview.6/KeyFlowStudio-0.1.0-preview.6-win-x64.zip
