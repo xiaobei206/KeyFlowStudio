@@ -654,3 +654,13 @@ M12-09 只实现有上限的显式 HTTP 缓冲请求；不代表大文件流式�
 - SHA256 sidecar：https://github.com/xiaobei206/anjian/releases/download/v0.1.0-preview.5/Anjian2026-0.1.0-preview.5-win-x64.zip.sha256
 - 使用方式：下载 ZIP，先对照 sidecar 验证 SHA256，完整解压并保留所有伴随文件，启动 `Anjian.App.exe`。这是预发布测试包而非稳定版；M14 的桌面实测仍须按前表逐项执行并保持真实状态。
 - **注意：** 上述链接只有在新的 Windows Actions release workflow 全部成功后才可用；必须核查对应 run 的 conclusion 与 Release assets。若失败，应先修复发布流水线，不能向用户宣称链接已就绪。
+
+
+## M14 实机测试包：已正式提供公开 Release 下载（2026-11-15）
+
+- Release：https://github.com/xiaobei206/anjian/releases/tag/v0.1.0-preview.5
+- Windows x64 ZIP：https://github.com/xiaobei206/anjian/releases/download/v0.1.0-preview.5/Anjian2026-0.1.0-preview.5-win-x64.zip
+- SHA256 sidecar：https://github.com/xiaobei206/anjian/releases/download/v0.1.0-preview.5/Anjian2026-0.1.0-preview.5-win-x64.zip.sha256
+- ZIP SHA256：`5bca6a6e818bc2a73f13ebcf0f3ee2aebdf41df823bcf3493b8a09508668cb38`，大小 87,638,530 bytes。已实际提取 Actions artifact 中的包并重算，和 sidecar 一致。
+- 发布工作流 run [43671440011](https://github.com/xiaobei206/anjian/actions/runs/43671440011) SUCCESS：Restore/Build、228/228 Core tests、API handbook、自包含发布、package smoke 4/4、ZIP/SHA 和 Release creation 全 PASS。
+- 在实机运行前，下列 M14 项目仍全部 NOT RUN。下载后先校验 sidecar，然后完整解压运行 `Anjian.App.exe`，并按上文逐项记录设备、结果和日志/截图。

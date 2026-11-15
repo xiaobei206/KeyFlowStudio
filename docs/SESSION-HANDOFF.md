@@ -4,11 +4,14 @@
 - 项目：按键精灵 2026（暂定工作名）
 - 仓库：xiaobei206/anjian
 - 主分支：main
-- 已发布版本：**v0.1.0-preview.4**
-- Release：https://github.com/xiaobei206/anjian/releases/tag/v0.1.0-preview.4
-- Release commit：`08886d9e66c08ba24f6f1b7d9e91bbdaeba8a9e0`
-- 发布 Actions run：`43253611158`，结论 SUCCESS。
-- v0.1.0-preview.4 发布包对应代码 commit：`08886d9e66c08ba24f6f1b7d9e91bbdaeba8a9e0`。
+- 最新已发布测试预发布版：**v0.1.0-preview.5**（M14 实机测试包；不是稳定版 1.0.0）。
+- 最新 Release：https://github.com/xiaobei206/anjian/releases/tag/v0.1.0-preview.5
+- Release commit：`632fd60c9136f827ef107c16ccb01be37b01941d`
+- Windows Release Actions run：`43671440011`，结论 SUCCESS。
+- ZIP：`Anjian2026-0.1.0-preview.5-win-x64.zip`，87,638,530 bytes，SHA256 `5bca6a6e818bc2a73f13ebcf0f3ee2aebdf41df823bcf3493b8a09508668cb38`。
+- 直接下载：https://github.com/xiaobei206/anjian/releases/download/v0.1.0-preview.5/Anjian2026-0.1.0-preview.5-win-x64.zip
+- SHA256 sidecar：https://github.com/xiaobei206/anjian/releases/download/v0.1.0-preview.5/Anjian2026-0.1.0-preview.5-win-x64.zip.sha256
+- 历史 v0.1.0-preview.4 Release 与资产保留不变。
 - M3 当前 main 开发代码验收基线：`71fd493cad0fbed1451a4ffa46192752a18bd0a6`（Windows Actions run `43282795272` PASS）；接手时仍须重新核对 main HEAD。
 - main 分支可能继续产生文档提交；新 GPT 接手时必须重新查询 main 最新 HEAD，不要把 handoff 中的历史提交 SHA 当成分支当前头部。
 - 当前阶段：M0/M2/M3/M4/M5/M6 代码与 Windows CI 验收均已完成；M6 最终 commit 4f9b2b2648fb154353ca55522e9c77fe77645506 对应 run 43300620614 SUCCESS（61/61 tests、Release Build 0 warnings/0 errors、API handbook check、win-x64 publish、ZIP/SHA256、artifact upload 全 PASS）。M1 Hook 与 M3/M4/M5/M6 Windows 桌面手工验收仍需独立执行（NOT RUN）。
@@ -57,17 +60,16 @@
 - 全局快捷键：空闲时 F10 启动；运行/暂停时 F11 暂停/继续、F12 中止。低级键盘钩子过滤模拟注入事件；只有对应动作可执行时才截获功能键。代码提交 `e8e96cb26df1a254d2db45dd2a72b2c7ef11cd9f`，Windows CI 已通过；实机验收待用户完成。
 - self-contained win-x64 ZIP 和 SHA256 发布资产。
 
-## 最新 Release 资产：v0.1.0-preview.4
-- Release 页面：https://github.com/xiaobei206/anjian/releases/tag/v0.1.0-preview.4
-- ZIP：`Anjian2026-0.1.0-preview.4-win-x64.zip`
-- ZIP 下载：https://github.com/xiaobei206/anjian/releases/download/v0.1.0-preview.4/Anjian2026-0.1.0-preview.4-win-x64.zip
-- ZIP 大小：51,910,925 bytes。
-- SHA256 sidecar：`Anjian2026-0.1.0-preview.4-win-x64.zip.sha256`
-- SHA256 下载：https://github.com/xiaobei206/anjian/releases/download/v0.1.0-preview.4/Anjian2026-0.1.0-preview.4-win-x64.zip.sha256
-- ZIP SHA256：`6b59ab27f825aa48b2ec5343cec826ad8b0ded759e9989af02d51f8b949f09aa`
-- GitHub Release asset digest 与 ZIP 内容 SHA256 一致；sidecar 已随 ZIP 一同发布。
-- Release asset IDs：ZIP `740099276`；SHA256 `740099275`。
-- Release ID：`443178727`，prerelease=true。
+## 最新 Release 资产：v0.1.0-preview.5
+- Release 页面：https://github.com/xiaobei206/anjian/releases/tag/v0.1.0-preview.5
+- ZIP：`Anjian2026-0.1.0-preview.5-win-x64.zip`
+- ZIP 下载：https://github.com/xiaobei206/anjian/releases/download/v0.1.0-preview.5/Anjian2026-0.1.0-preview.5-win-x64.zip
+- ZIP 大小：87,638,530 bytes。
+- SHA256 sidecar：`Anjian2026-0.1.0-preview.5-win-x64.zip.sha256`
+- SHA256 下载：https://github.com/xiaobei206/anjian/releases/download/v0.1.0-preview.5/Anjian2026-0.1.0-preview.5-win-x64.zip.sha256
+- ZIP SHA256：`5bca6a6e818bc2a73f13ebcf0f3ee2aebdf41df823bcf3493b8a09508668cb38`；已从 Actions artifact 解包并重算，与 sidecar 一致。
+- Release asset IDs：ZIP `749659486`；SHA256 `749659484`。
+- Release ID：`445779327`，prerelease=true。
 
 ## 历史 Release：v0.1.0-preview.1
 - Release 页面：https://github.com/xiaobei206/anjian/releases/tag/v0.1.0-preview.1
@@ -1019,3 +1021,19 @@ M13-01..04 的代码与 Windows 自动化工作已收尾。下一会话不再重
 - 发布依据：按仓库现有 `.github/workflows/windows-build.yml`，以 commit message 前缀 `release:` 触发 Windows 构建、测试、self-contained win-x64 ZIP、SHA256 sidecar 与 GitHub prerelease 创建。已同步 `VERSION` 和 `src/Anjian.App/Anjian.App.csproj` 到 `0.1.0-preview.5`，以通过 workflow 的 ProductVersion 一致性检查。
 - 发布链接（由 workflow 生成）：https://github.com/xiaobei206/anjian/releases/tag/v0.1.0-preview.5；ZIP: https://github.com/xiaobei206/anjian/releases/download/v0.1.0-preview.5/Anjian2026-0.1.0-preview.5-win-x64.zip；SHA256: https://github.com/xiaobei206/anjian/releases/download/v0.1.0-preview.5/Anjian2026-0.1.0-preview.5-win-x64.zip.sha256。只有核实 workflow 成功并确认 Release 资产确实存在后，才可报告发布成功；失败则需修复并重跑。
 - M14 所有桌面实测在用户机器实际运行前仍 NOT RUN。下一会话唯一任务仍是 M14：从 Release 下载 ZIP，核验 sidecar、完整解压并实测；收集 Windows build、DPI/拓扑、结果、日志和截图。CI 不替代实机结果。
+
+
+## v0.1.0-preview.5 发布结果（2026-11-15；已由 GitHub 实际核验）
+
+- Release 页面：https://github.com/xiaobei206/anjian/releases/tag/v0.1.0-preview.5
+- Windows x64 ZIP：https://github.com/xiaobei206/anjian/releases/download/v0.1.0-preview.5/Anjian2026-0.1.0-preview.5-win-x64.zip
+- SHA256 sidecar：https://github.com/xiaobei206/anjian/releases/download/v0.1.0-preview.5/Anjian2026-0.1.0-preview.5-win-x64.zip.sha256
+- ZIP SHA256：`5bca6a6e818bc2a73f13ebcf0f3ee2aebdf41df823bcf3493b8a09508668cb38`；文件大小 87,638,530 bytes。已从当前 Windows Actions artifact 中读取 ZIP 和 sidecar，并对 ZIP 字节重新计算 SHA256，与 sidecar 内容一致。
+- Release ID `445779327`；ZIP asset ID `749659486`，sidecar asset ID `749659484`。
+- 发布提交 `632fd60c9136f827ef107c16ccb01be37b01941d`，Windows Actions run [43671440011](https://github.com/xiaobei206/anjian/actions/runs/43671440011) SUCCESS。Restore、Release Build、Core tests `228/228`、API handbook check、自包含 win-x64 publish、Sprite/Plugin/MultiInstance/Monitor package smoke `4/4`、ZIP/SHA256、artifact upload 与 GitHub Release creation 全部成功；Build 0 warnings / 0 errors。
+- 该版本是为解决实机测试包下载阻塞而生成的 **prerelease**，不代表 M14 实机验收完成。实际键鼠、WinForms、DPI/多屏、权限弹窗、托盘/退出与长时稳定性在用户 Windows 10/11 机器执行前继续 NOT RUN。
+
+
+## 下一会话唯一任务（发布后覆盖）：M14 Windows 10/11 桌面实机验收
+
+测试包现已通过公开 GitHub Release 提供。不要再以“缺少可下载程序”为阻塞；在实际 Windows 10/11 x64 设备下载上述 ZIP，核对 SHA256，完整解压并保留所有伴随文件，再运行 `Anjian.App.exe`。严格按 `docs/ACCEPTANCE-TEST-CN.md` 的 M14 清单执行并记录 OS build、DPI/显示器拓扑、逐项结果、日志和截图。CI 是 PASS，但所有真实桌面项目仍 NOT RUN，直到取得实机证据。

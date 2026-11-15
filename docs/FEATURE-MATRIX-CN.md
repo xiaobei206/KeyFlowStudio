@@ -120,3 +120,14 @@ F31 从 M13-01 的“契约/状态模型部分实现”更新为 M13-02“运行
 
 - 为解决测试包此前仅作为 Actions artifact/会话附件、用户无法下载的问题，准备发布 `v0.1.0-preview.5` 公开 prerelease；不覆盖 preview.4，不代表桌面功能已通过。
 - 下载页：https://github.com/xiaobei206/anjian/releases/tag/v0.1.0-preview.5。M14 的真实键鼠、DPI/多屏、权限窗、托盘/退出与长时测试继续 NOT RUN，直到提交实际设备测试证据。
+
+
+## v0.1.0-preview.5 发布结果（2026-11-15；已由 GitHub 实际核验）
+
+- Release 页面：https://github.com/xiaobei206/anjian/releases/tag/v0.1.0-preview.5
+- Windows x64 ZIP：https://github.com/xiaobei206/anjian/releases/download/v0.1.0-preview.5/Anjian2026-0.1.0-preview.5-win-x64.zip
+- SHA256 sidecar：https://github.com/xiaobei206/anjian/releases/download/v0.1.0-preview.5/Anjian2026-0.1.0-preview.5-win-x64.zip.sha256
+- ZIP SHA256：`5bca6a6e818bc2a73f13ebcf0f3ee2aebdf41df823bcf3493b8a09508668cb38`；文件大小 87,638,530 bytes。已从当前 Windows Actions artifact 中读取 ZIP 和 sidecar，并对 ZIP 字节重新计算 SHA256，与 sidecar 内容一致。
+- Release ID `445779327`；ZIP asset ID `749659486`，sidecar asset ID `749659484`。
+- 发布提交 `632fd60c9136f827ef107c16ccb01be37b01941d`，Windows Actions run [43671440011](https://github.com/xiaobei206/anjian/actions/runs/43671440011) SUCCESS。Restore、Release Build、Core tests `228/228`、API handbook check、自包含 win-x64 publish、Sprite/Plugin/MultiInstance/Monitor package smoke `4/4`、ZIP/SHA256、artifact upload 与 GitHub Release creation 全部成功；Build 0 warnings / 0 errors。
+- 该版本是为解决实机测试包下载阻塞而生成的 **prerelease**，不代表 M14 实机验收完成。实际键鼠、WinForms、DPI/多屏、权限弹窗、托盘/退出与长时稳定性在用户 Windows 10/11 机器执行前继续 NOT RUN。

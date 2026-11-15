@@ -963,3 +963,14 @@ M13-04 已结束；唯一下一任务为 M14：集中执行 Windows 10/11 桌面
 - 为提供正式的公开测试下载入口，本次将 `VERSION` 与 App `<Version>` 同步提升到 `0.1.0-preview.5`，并以现有 release-trigger workflow 生成新的 prerelease、win-x64 ZIP 和 SHA256 sidecar。该动作只为 M14 实机测试提供可下载程序，不代表 M14 已验收，不覆盖 preview.4、不发布稳定版 1.0.0。
 - 发布 commit 推送后必须以实际 Windows Actions run 核验 Restore/Build/Core tests/API handbook/publish/package checks/release assets。workflow 未 PASS 或 Release 资产不存在前不能声称已发布成功。
 - 实机测试仍 NOT RUN。后续在真实 Windows 10/11 x64 设备核验 SHA256、完整解压运行，并执行 M14 清单，提交 OS build、DPI/拓扑、测试结果、日志和截图。
+
+
+## v0.1.0-preview.5 发布结果（2026-11-15；已由 GitHub 实际核验）
+
+- Release 页面：https://github.com/xiaobei206/anjian/releases/tag/v0.1.0-preview.5
+- Windows x64 ZIP：https://github.com/xiaobei206/anjian/releases/download/v0.1.0-preview.5/Anjian2026-0.1.0-preview.5-win-x64.zip
+- SHA256 sidecar：https://github.com/xiaobei206/anjian/releases/download/v0.1.0-preview.5/Anjian2026-0.1.0-preview.5-win-x64.zip.sha256
+- ZIP SHA256：`5bca6a6e818bc2a73f13ebcf0f3ee2aebdf41df823bcf3493b8a09508668cb38`；文件大小 87,638,530 bytes。已从当前 Windows Actions artifact 中读取 ZIP 和 sidecar，并对 ZIP 字节重新计算 SHA256，与 sidecar 内容一致。
+- Release ID `445779327`；ZIP asset ID `749659486`，sidecar asset ID `749659484`。
+- 发布提交 `632fd60c9136f827ef107c16ccb01be37b01941d`，Windows Actions run [43671440011](https://github.com/xiaobei206/anjian/actions/runs/43671440011) SUCCESS。Restore、Release Build、Core tests `228/228`、API handbook check、自包含 win-x64 publish、Sprite/Plugin/MultiInstance/Monitor package smoke `4/4`、ZIP/SHA256、artifact upload 与 GitHub Release creation 全部成功；Build 0 warnings / 0 errors。
+- 该版本是为解决实机测试包下载阻塞而生成的 **prerelease**，不代表 M14 实机验收完成。实际键鼠、WinForms、DPI/多屏、权限弹窗、托盘/退出与长时稳定性在用户 Windows 10/11 机器执行前继续 NOT RUN。

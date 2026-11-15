@@ -476,3 +476,13 @@ M13 代码/自动化工作已结束，但不代表真实 Windows 10/11 桌面验
 - 用户无法使用先前会话附件/限期 Actions artifact，故按仓库现有 release-trigger workflow 准备 `v0.1.0-preview.5`，发布新的 self-contained win-x64 ZIP 与 SHA256 sidecar，便于实际 Windows 10/11 测试。
 - 此为测试预发布版，不是稳定版 1.0.0；旧 `v0.1.0-preview.4` Release 与资产不覆盖。应用自动化通过与实机验收分开记录。
 - M14 实机结果在用户设备执行前仍为 **NOT RUN**；下一步下载 Release 包、校验完整性并按 ACCEPTANCE-TEST-CN.md 执行。
+
+
+### v0.1.0-preview.5 可下载测试包已发布（2026-11-15）
+
+- 用户指出先前只有不可用的会话附件/限期 Actions artifact，没有 Release 下载入口。为解除 M14 实机验收的实际阻塞，已通过仓库既有 release workflow 发布 `v0.1.0-preview.5`。
+- Release：https://github.com/xiaobei206/anjian/releases/tag/v0.1.0-preview.5
+- ZIP：https://github.com/xiaobei206/anjian/releases/download/v0.1.0-preview.5/Anjian2026-0.1.0-preview.5-win-x64.zip
+- ZIP SHA256：`5bca6a6e818bc2a73f13ebcf0f3ee2aebdf41df823bcf3493b8a09508668cb38`；sidecar 已公开并已从 Actions artifact 解包核验。
+- Windows Actions run [43671440011](https://github.com/xiaobei206/anjian/actions/runs/43671440011) SUCCESS：Build 0 warnings/errors、228/228 Core tests、API handbook、self-contained publish、package smoke 4/4、ZIP/SHA 和 Release assets 创建全 PASS。
+- 该版本是 M14 测试 prerelease，不是稳定版。真实 Windows 桌面测试执行前仍 NOT RUN。
