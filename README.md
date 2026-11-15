@@ -1,18 +1,30 @@
-# 按键精灵 2026
+# Mouscript Studio
 
-Windows 10/11 x64 桌面自动化工具，首版使用 WinForms + .NET 10 + Lua 5.4。
+Windows 10/11 x64 键鼠自动化与 Lua 脚本开发环境，基于 WinForms、.NET 10 与 Lua 5.4。仓库名 `xiaobei206/anjian`、内部 `Anjian.App.exe` 文件名和旧用户数据目录继续保留，以兼容历史脚本与配置。
 
-## 当前测试版下载与进度
+## 发布版本
 
-**最新测试预发布版：v0.1.0-preview.5（Windows x64）**。本版用于解除 M14 实机验收的下载阻塞，包含 main 已完成的多实例、定时任务、运行实例列表与日志 UI；这是预发布测试包，不是稳定版 1.0.0。
+### Mouscript Studio（完整开发版）
 
-下载入口：[v0.1.0-preview.5 Release 页面](https://github.com/xiaobei206/anjian/releases/tag/v0.1.0-preview.5)、[直接下载 Windows x64 ZIP](https://github.com/xiaobei206/anjian/releases/download/v0.1.0-preview.5/Anjian2026-0.1.0-preview.5-win-x64.zip)、[SHA256 校验文件](https://github.com/xiaobei206/anjian/releases/download/v0.1.0-preview.5/Anjian2026-0.1.0-preview.5-win-x64.zip.sha256)。
+- 当前测试版本：v0.1.0-preview.6
+- Release：https://github.com/xiaobei206/anjian/releases/tag/v0.1.0-preview.6
+- Windows x64 ZIP：https://github.com/xiaobei206/anjian/releases/download/v0.1.0-preview.6/MouscriptStudio-0.1.0-preview.6-win-x64.zip
+- SHA256 sidecar：https://github.com/xiaobei206/anjian/releases/download/v0.1.0-preview.6/MouscriptStudio-0.1.0-preview.6-win-x64.zip.sha256
+- preview.6 改进：图像资源窗口 SplitContainer 启动安全、分割宽度边界保护、分类下拉菜单、常用操作分行布局、640×124 DPI-aware 悬浮窗。
 
-ZIP SHA256：`5bca6a6e818bc2a73f13ebcf0f3ee2aebdf41df823bcf3493b8a09508668cb38`。Windows Actions run [43671440011](https://github.com/xiaobei206/anjian/actions/runs/43671440011) 已全部成功：228/228 Core tests、0 warnings/errors、API handbook、self-contained publish、4/4 package smoke，以及 Release 资产创建。此为测试预发布版本；真实 Windows 桌面验收仍未执行。
+### Mouscript Lite（独立稳定版）
 
-下载后请完整解压并保留所有运行时伴随文件，再启动 `Anjian.App.exe`；不要只拿出 EXE 单独运行。请先核对同目录 SHA256 sidecar。Windows Actions 自动化通过只是构建/自动测试证据，M14 的真实键鼠、WinForms、DPI/多屏、权限弹窗、托盘退出和长时间稳定性仍必须由 Windows 10/11 实机逐项验收。
+- 当前稳定版本：v1.0.0
+- Release：https://github.com/xiaobei206/anjian/releases/tag/v1.0.0
+- Windows x64 ZIP：https://github.com/xiaobei206/anjian/releases/download/v1.0.0/MouscriptLite-1.0.0-win-x64.zip
+- SHA256 sidecar：https://github.com/xiaobei206/anjian/releases/download/v1.0.0/MouscriptLite-1.0.0-win-x64.zip.sha256
+- Lite 严格冻结于原 v0.1.0-preview.4 代码基线，不含后续 IDE、图像资源、OCR、参数设计器、插件、小精灵和多实例等功能。
 
-### preview.4 历史发布记录与开发进度（保留历史证据）
+下载 ZIP 后先核对同目录 SHA256 sidecar，再完整解压并保留全部伴随文件，启动 `Anjian.App.exe`。Windows Actions 通过只代表构建和自动化检查通过；Windows 10/11 实机键鼠、DPI/多屏、托盘、权限与长时间稳定性仍需单独验收。
+
+### 历史版本与开发进度
+
+
 
 preview.4 历史发布记录（截至 2026-11-12）。Windows CI 的 Restore、Build、7 项测试、自包含发布、ZIP/SHA256 和 GitHub Release 创建全部成功。preview.4 加入独立悬浮窗、系统托盘生命周期、悬浮窗循环设置和自定义 EXE/托盘图标。注意：窗口/托盘功能仍需 Windows 10/11 实机手工验收。
 

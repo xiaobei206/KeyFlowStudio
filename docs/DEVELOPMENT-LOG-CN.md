@@ -974,3 +974,14 @@ M13-04 已结束；唯一下一任务为 M14：集中执行 Windows 10/11 桌面
 - Release ID `445779327`；ZIP asset ID `749659486`，sidecar asset ID `749659484`。
 - 发布提交 `632fd60c9136f827ef107c16ccb01be37b01941d`，Windows Actions run [43671440011](https://github.com/xiaobei206/anjian/actions/runs/43671440011) SUCCESS。Restore、Release Build、Core tests `228/228`、API handbook check、自包含 win-x64 publish、Sprite/Plugin/MultiInstance/Monitor package smoke `4/4`、ZIP/SHA256、artifact upload 与 GitHub Release creation 全部成功；Build 0 warnings / 0 errors。
 - 该版本是为解决实机测试包下载阻塞而生成的 **prerelease**，不代表 M14 实机验收完成。实际键鼠、WinForms、DPI/多屏、权限弹窗、托盘/退出与长时稳定性在用户 Windows 10/11 机器执行前继续 NOT RUN。
+
+
+## 2026-11-15 — Mouscript Studio preview.6 UI 修复与 Mouscript Lite 1.0.0 分线
+
+- 用户实测 preview.5 发现“图像资源”窗口打开时立即抛出 `SplitterDistance` 范围异常。主线对图像资源 SplitContainer 明确设置初始尺寸、Panel 最小尺寸和安全分割距离，并在窗口尺寸变化时钳制合法范围；窗口改为 DPI-aware。
+- 主窗口把超长工具栏改为“文件 / 编辑 / 录制 / 运行 / 调试 / 资源 / 工具 / 窗口”分类菜单，首页仅保留高频命令和精简设置行。
+- 悬浮窗由固定 660×142 调整为 640×124 逻辑像素，使用 DPI 自动缩放并收紧行布局，保留无边框悬浮行为。
+- 新增 Windows CI 的 Image Resource Manager WinForms 启动/布局 smoke：空脚本、空资源状态实例化窗口并执行 layout。首轮暴露 PowerShell 对 GUI 进程 `$LASTEXITCODE` 读取不可靠，改为 `Start-Process -PassThru` 并捕获 stdout/stderr 后，run [43725921665](https://github.com/xiaobei206/anjian/actions/runs/43725921665) 对修复 HEAD `edd9311c93a92aac81c9e91dc27a6d1ed48f5c82` 全 PASS：Build 0 warnings/errors、228/228 Core tests、API handbook、publish、UI smoke、Worker smoke。
+- Lite 从 preview.4 原始 commit `08886d9e66c08ba24f6f1b7d9e91bbdaeba8a9e0` 建立独立分支 `release/lite-1.0.0`，仅调整品牌、版本/包名与悬浮窗 640×124 DPI 布局，不引入 preview.5 及 main 后续功能。Lite v1.0.0 发布 workflow 成功（后续品牌重命名后的 Release 资产以最新 API 核验为准）。
+- 产品名初步筛查后选用 Mouscript Studio / Mouscript Lite；仓库 `xiaobei206/anjian`、内部 EXE 名与 `%LOCALAPPDATA%\\Anjian2026` 用户数据路径维持兼容。
+- 所有 CI PASS 只代表自动化；用户 Windows 10/11 真机测试仍单独记录，不能用 smoke 覆盖完整 M14。

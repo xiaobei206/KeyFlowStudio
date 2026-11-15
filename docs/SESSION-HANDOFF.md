@@ -1,21 +1,19 @@
 # 当前会话交接
 
 ## 当前状态
-- 项目：按键精灵 2026（暂定工作名）
-- 仓库：xiaobei206/anjian
-- 主分支：main
-- 最新已发布测试预发布版：**v0.1.0-preview.5**（M14 实机测试包；不是稳定版 1.0.0）。
-- 最新 Release：https://github.com/xiaobei206/anjian/releases/tag/v0.1.0-preview.5
-- Release commit：`632fd60c9136f827ef107c16ccb01be37b01941d`
-- Windows Release Actions run：`43671440011`，结论 SUCCESS。
-- ZIP：`Anjian2026-0.1.0-preview.5-win-x64.zip`，87,638,530 bytes，SHA256 `5bca6a6e818bc2a73f13ebcf0f3ee2aebdf41df823bcf3493b8a09508668cb38`。
-- 直接下载：https://github.com/xiaobei206/anjian/releases/download/v0.1.0-preview.5/Anjian2026-0.1.0-preview.5-win-x64.zip
-- SHA256 sidecar：https://github.com/xiaobei206/anjian/releases/download/v0.1.0-preview.5/Anjian2026-0.1.0-preview.5-win-x64.zip.sha256
-- 历史 v0.1.0-preview.4 Release 与资产保留不变。
-- M3 当前 main 开发代码验收基线：`71fd493cad0fbed1451a4ffa46192752a18bd0a6`（Windows Actions run `43282795272` PASS）；接手时仍须重新核对 main HEAD。
-- main 分支可能继续产生文档提交；新 GPT 接手时必须重新查询 main 最新 HEAD，不要把 handoff 中的历史提交 SHA 当成分支当前头部。
-- 当前阶段：M0/M2/M3/M4/M5/M6 代码与 Windows CI 验收均已完成；M6 最终 commit 4f9b2b2648fb154353ca55522e9c77fe77645506 对应 run 43300620614 SUCCESS（61/61 tests、Release Build 0 warnings/0 errors、API handbook check、win-x64 publish、ZIP/SHA256、artifact upload 全 PASS）。M1 Hook 与 M3/M4/M5/M6 Windows 桌面手工验收仍需独立执行（NOT RUN）。
-
+- 完整产品：Mouscript Studio（Windows 键鼠自动化与 Lua 脚本开发环境）。
+- 独立轻量版：Mouscript Lite 1.0.0。
+- 仓库：xiaobei206/anjian；完整开发主线：main；Lite 冻结分支：release/lite-1.0.0。
+- 最新完整版本：v0.1.0-preview.6（Windows x64 prerelease）。
+- 完整版 Release：https://github.com/xiaobei206/anjian/releases/tag/v0.1.0-preview.6
+- 完整版 ZIP：MouscriptStudio-0.1.0-preview.6-win-x64.zip；SHA256 sidecar 随 Release 发布。
+- Lite 稳定版：v1.0.0；Release：https://github.com/xiaobei206/anjian/releases/tag/v1.0.0
+- Lite ZIP：MouscriptLite-1.0.0-win-x64.zip；SHA256 sidecar 随 Release 发布。
+- preview.6 自动化证据：Windows Actions run [43725921665](https://github.com/xiaobei206/anjian/actions/runs/43725921665) 对 UI 修复 HEAD `edd9311c93a92aac81c9e91dc27a6d1ed48f5c82` 全 PASS：Build、228/228 Core tests、API handbook、self-contained publish、Image Resource Manager WinForms startup/layout smoke 与 packaged Worker smoke 均成功。
+- preview.6 UI 修复提交：`1cdce80b74f3f8d410eea97bc6861dbbb95314d8`；烟测退出码捕获修复：`edd9311c93a92aac81c9e91dc27a6d1ed48f5c82`。产品品牌调整为 Mouscript 后的最终 Release commit / run 应以本次 GitHub 最新结果为准。
+- Lite 源码基线为 v0.1.0-preview.4 原始提交 `08886d9e66c08ba24f6f1b7d9e91bbdaeba8a9e0`，独立分支不接收 main 后续开发功能。
+- 历史 v0.1.0-preview.4 与 preview.5 Release 保留；preview.5 仍作为历史 M14 测试包。
+- **实机验收边界：** Windows Actions/WinForms smoke 不能代替用户 Windows 10/11 桌面的真实键鼠、DPI/多屏、托盘/退出、权限弹窗和长时稳定性验收；M14 设备实测在取得证据前继续 NOT RUN。
 ## 完整产品目标已冻结（2026-11-13）
 - 产品范围基线：[docs/PRD-CN.md](PRD-CN.md)。
 - 完整功能矩阵（当前状态、阶段、验收条件）：[docs/FEATURE-MATRIX-CN.md](FEATURE-MATRIX-CN.md)。

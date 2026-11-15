@@ -664,3 +664,12 @@ M12-09 只实现有上限的显式 HTTP 缓冲请求；不代表大文件流式�
 - ZIP SHA256：`5bca6a6e818bc2a73f13ebcf0f3ee2aebdf41df823bcf3493b8a09508668cb38`，大小 87,638,530 bytes。已实际提取 Actions artifact 中的包并重算，和 sidecar 一致。
 - 发布工作流 run [43671440011](https://github.com/xiaobei206/anjian/actions/runs/43671440011) SUCCESS：Restore/Build、228/228 Core tests、API handbook、自包含发布、package smoke 4/4、ZIP/SHA 和 Release creation 全 PASS。
 - 在实机运行前，下列 M14 项目仍全部 NOT RUN。下载后先校验 sidecar，然后完整解压运行 `Anjian.App.exe`，并按上文逐项记录设备、结果和日志/截图。
+
+
+## preview.6 图像资源窗口回归烟测（Windows Actions）
+
+- 覆盖：无脚本操作、无图像资源的空状态实例化 `ImageResourceManagerForm`，执行 WinForms 创建与布局；异常写入 stderr 并以非零退出码失败。
+- 回归结果：Windows Actions run [43725921665](https://github.com/xiaobei206/anjian/actions/runs/43725921665) SUCCESS；Build、228/228 Core tests、API handbook、self-contained publish、Image Resource Manager WinForms startup/layout smoke、packaged Worker smoke 均 PASS。
+- 该 smoke 只覆盖窗口构造和初始布局，不等于人工点击、导入/移除图片、调整窗口大小、高 DPI、多显示器或触摸等完整桌面验收。
+- 用户原始报告的 SplitterDistance 异常已按代码路径修复：启动显式设定 split 初始尺寸与最小面板尺寸，并对 resize 后的 SplitterDistance 作边界钳制。
+- 悬浮窗和主窗口已加入 DPI 布局改动；实际 Windows 10/11 桌面上仍需验证不同缩放比例和多显示器行为，未取得用户设备结果前保持 NOT RUN。
