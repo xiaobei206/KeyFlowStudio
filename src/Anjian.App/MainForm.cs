@@ -88,7 +88,7 @@ internal sealed class MainForm : Form
 
     public MainForm()
     {
-        Text = "KeyFlow Studio";
+        Text = "Mouscript Studio";
         MinimumSize = new Size(980, 650);
         Size = new Size(1180, 780);
         StartPosition = FormStartPosition.CenterScreen;
@@ -549,12 +549,12 @@ internal sealed class MainForm : Form
         trayMenu.Items.Add("显示悬浮窗", null, (_, _) => ShowFloatingWindow());
         trayMenu.Items.Add("隐藏悬浮窗", null, (_, _) => HideFloatingWindow());
         trayMenu.Items.Add(new ToolStripSeparator());
-        trayMenu.Items.Add("退出KeyFlow Studio", null, (_, _) => ExitApplication());
+        trayMenu.Items.Add("退出Mouscript Studio", null, (_, _) => ExitApplication());
 
         _trayIcon = new NotifyIcon
         {
             Icon = (Icon)_applicationIcon.Clone(),
-            Text = "KeyFlow Studio",
+            Text = "Mouscript Studio",
             ContextMenuStrip = trayMenu,
             Visible = true
         };
@@ -1012,7 +1012,7 @@ internal sealed class MainForm : Form
         }
         catch (Exception ex)
         {
-            MessageBox.Show(this, "保存失败：" + ex.Message, "KeyFlow Studio", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(this, "保存失败：" + ex.Message, "Mouscript Studio", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return false;
         }
     }
@@ -1995,7 +1995,7 @@ internal sealed class MainForm : Form
 
     private void UpdateTitle()
     {
-        Text = $"KeyFlow Studio · {(_current?.Name ?? "未选择脚本")}{(_dirty ? " *" : "")}";
+        Text = $"Mouscript Studio · {(_current?.Name ?? "未选择脚本")}{(_dirty ? " *" : "")}";
         if (_activeTab is not null)
             _activeTab.Page.Text = _activeTab.Entry.Name + (_activeTab.Dirty ? " *" : string.Empty);
         UpdateFloatingState();

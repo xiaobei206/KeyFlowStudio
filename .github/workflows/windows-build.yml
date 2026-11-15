@@ -33,8 +33,8 @@ jobs:
       - name: Test Image Resource Manager WinForms layout
         shell: pwsh
         run: |
-          $smokeOutput = Join-Path $env:RUNNER_TEMP "KeyFlowStudio-ImageResourceUiSmoke.txt"
-          $smokeError = Join-Path $env:RUNNER_TEMP "KeyFlowStudio-ImageResourceUiSmoke.err"
+          $smokeOutput = Join-Path $env:RUNNER_TEMP "MouscriptStudio-ImageResourceUiSmoke.txt"
+          $smokeError = Join-Path $env:RUNNER_TEMP "MouscriptStudio-ImageResourceUiSmoke.err"
           $smoke = Start-Process -FilePath "artifacts/publish/win-x64/Anjian.App.exe" -ArgumentList "--image-resource-ui-smoke-test" -Wait -PassThru -NoNewWindow -RedirectStandardOutput $smokeOutput -RedirectStandardError $smokeError
           if (Test-Path $smokeOutput) { Get-Content $smokeOutput }
           if (Test-Path $smokeError) { Get-Content $smokeError }
@@ -61,8 +61,8 @@ jobs:
         with:
           name: Anjian2026-preview-win-x64
           path: |
-            artifacts/KeyFlowStudio-*.zip
-            artifacts/KeyFlowStudio-*.zip.sha256
+            artifacts/MouscriptStudio-*.zip
+            artifacts/MouscriptStudio-*.zip.sha256
           if-no-files-found: error
           retention-days: 30
       - name: Read release version

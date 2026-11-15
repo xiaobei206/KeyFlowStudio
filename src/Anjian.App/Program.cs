@@ -39,7 +39,7 @@ internal static class Program
                     {
                         MessageBox.Show("小精灵包校验失败，脚本不会启动：" + Environment.NewLine +
                             string.Join(Environment.NewLine, issues.Take(20)),
-                            "KeyFlow Studio", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            "Mouscript Studio", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return 2;
                     }
                     Application.Run(new SpriteLauncherForm(spriteManifest));
@@ -47,7 +47,7 @@ internal static class Program
                 catch (Exception ex)
                 {
                     MessageBox.Show("小精灵包检查失败，脚本不会启动：" + Environment.NewLine + ex.Message,
-                        "KeyFlow Studio", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        "Mouscript Studio", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return 2;
                 }
             }
