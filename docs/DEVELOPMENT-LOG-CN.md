@@ -985,3 +985,21 @@ M13-04 已结束；唯一下一任务为 M14：集中执行 Windows 10/11 桌面
 - Lite 从 preview.4 原始 commit `08886d9e66c08ba24f6f1b7d9e91bbdaeba8a9e0` 建立独立分支 `release/lite-1.0.0`，仅调整品牌、版本/包名与悬浮窗 640×124 DPI 布局，不引入 preview.5 及 main 后续功能。Lite v1.0.0 发布 workflow 成功（后续品牌重命名后的 Release 资产以最新 API 核验为准）。
 - 产品名初步筛查后选用 Mouscript Studio / Mouscript Lite；仓库 `xiaobei206/anjian`、内部 EXE 名与 `%LOCALAPPDATA%\\Anjian2026` 用户数据路径维持兼容。
 - 所有 CI PASS 只代表自动化；用户 Windows 10/11 真机测试仍单独记录，不能用 smoke 覆盖完整 M14。
+
+## 2026-11-15 — Mouscript Studio v0.1.0-preview.6 / Mouscript Lite v1.0.0 最终发布核验
+
+### Mouscript Studio v0.1.0-preview.6
+- Release：https://github.com/xiaobei206/anjian/releases/tag/v0.1.0-preview.6（Release ID `446132794`，prerelease=true）。
+- 发布 commit：`f5511306c0c87fa08a7c0e08677d6ccc77a4c9d1`；Windows Actions run [43726469737](https://github.com/xiaobei206/anjian/actions/runs/43726469737) SUCCESS。
+- ZIP：`MouscriptStudio-0.1.0-preview.6-win-x64.zip`，87,639,119 bytes；GitHub Release asset SHA256 `dc34931ec3735b4ebbaff7637a26d2b32c2039cceee9fe5fdb53dcf4f343c6bb`。Sidecar 同步上传。
+- 全流程 PASS：Restore、Release Build（0 warnings / 0 errors）、Core tests 228/228、API handbook check、self-contained win-x64 publish、Image Resource Manager WinForms startup/layout smoke、packaged Sprite/Worker smoke、ZIP/SHA、artifact upload、Release creation。
+
+### Mouscript Lite v1.0.0
+- Release：https://github.com/xiaobei206/anjian/releases/tag/v1.0.0（Release ID `446127849`，prerelease=false）。
+- 独立分支 `release/lite-1.0.0`，源码功能基线保持 preview.4 原始提交 `08886d9e66c08ba24f6f1b7d9e91bbdaeba8a9e0`；v1.0.0 tag target `9e2f8d8528f34468dd0423262da6ebe56d572de6`。
+- Windows Actions run [43726550455](https://github.com/xiaobei206/anjian/actions/runs/43726550455) SUCCESS：Restore、Build（0 warnings / 0 errors）、7/7 Core tests、自包含发布、ZIP/SHA、旧品牌资产清理、tag retarget 和 Release 更新全部 PASS。
+- ZIP：`MouscriptLite-1.0.0-win-x64.zip`，51,911,007 bytes；GitHub Release asset SHA256 `ffab0dd7382a927949f405b5daf39b35a490c03539e17b507f4f5cbb286c0eb2`。Release 资产清单仅保留新的 MouscriptLite ZIP 与 SHA sidecar。
+
+### 验收边界
+- preview.6 CI 中图像资源窗体空状态 smoke 通过；这验证窗体初始化/布局，不等于真实用户桌面手工验收。
+- Mouscript Lite 与 Mouscript Studio 的 Windows 10/11 真机键鼠、DPI/多屏、托盘/退出、权限行为与长时间稳定性，在用户设备取得日志/截图以前均继续 NOT RUN。

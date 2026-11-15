@@ -4,16 +4,17 @@
 - 完整产品：Mouscript Studio（Windows 键鼠自动化与 Lua 脚本开发环境）。
 - 独立轻量版：Mouscript Lite 1.0.0。
 - 仓库：xiaobei206/anjian；完整开发主线：main；Lite 冻结分支：release/lite-1.0.0。
-- 最新完整版本：v0.1.0-preview.6（Windows x64 prerelease）。
+- 最新完整版本：v0.1.0-preview.6（Windows x64 prerelease），Release ID `446132794`。
 - 完整版 Release：https://github.com/xiaobei206/anjian/releases/tag/v0.1.0-preview.6
-- 完整版 ZIP：MouscriptStudio-0.1.0-preview.6-win-x64.zip；SHA256 sidecar 随 Release 发布。
-- Lite 稳定版：v1.0.0；Release：https://github.com/xiaobei206/anjian/releases/tag/v1.0.0
-- Lite ZIP：MouscriptLite-1.0.0-win-x64.zip；SHA256 sidecar 随 Release 发布。
-- preview.6 自动化证据：Windows Actions run [43725921665](https://github.com/xiaobei206/anjian/actions/runs/43725921665) 对 UI 修复 HEAD `edd9311c93a92aac81c9e91dc27a6d1ed48f5c82` 全 PASS：Build、228/228 Core tests、API handbook、self-contained publish、Image Resource Manager WinForms startup/layout smoke 与 packaged Worker smoke 均成功。
-- preview.6 UI 修复提交：`1cdce80b74f3f8d410eea97bc6861dbbb95314d8`；烟测退出码捕获修复：`edd9311c93a92aac81c9e91dc27a6d1ed48f5c82`。产品品牌调整为 Mouscript 后的最终 Release commit / run 应以本次 GitHub 最新结果为准。
+- 完整版 ZIP：`MouscriptStudio-0.1.0-preview.6-win-x64.zip`，87,639,119 bytes；SHA256 `dc34931ec3735b4ebbaff7637a26d2b32c2039cceee9fe5fdb53dcf4f343c6bb`。
+- 完整版发布 commit：`f5511306c0c87fa08a7c0e08677d6ccc77a4c9d1`；Windows Actions run [43726469737](https://github.com/xiaobei206/anjian/actions/runs/43726469737) SUCCESS。Restore/Build、228/228 Core tests、0 warnings/0 errors、API handbook、self-contained publish、Image Resource Manager UI startup/layout smoke、packaged Worker smoke、ZIP/SHA 与 Release 创建全 PASS。
+- Lite 稳定版：v1.0.0（非 prerelease），Release ID `446127849`；Release：https://github.com/xiaobei206/anjian/releases/tag/v1.0.0
+- Lite ZIP：`MouscriptLite-1.0.0-win-x64.zip`，51,911,007 bytes；SHA256 `ffab0dd7382a927949f405b5daf39b35a490c03539e17b507f4f5cbb286c0eb2`。
+- Lite 发布 commit / v1.0.0 tag target：`9e2f8d8528f34468dd0423262da6ebe56d572de6`；Windows Actions run [43726550455](https://github.com/xiaobei206/anjian/actions/runs/43726550455) SUCCESS。Restore/Build、7/7 Core tests、0 warnings/0 errors、自包含发布、ZIP/SHA、旧 `KeyFlowLite` 资产清理与 Release 名称更新全 PASS。
 - Lite 源码基线为 v0.1.0-preview.4 原始提交 `08886d9e66c08ba24f6f1b7d9e91bbdaeba8a9e0`，独立分支不接收 main 后续开发功能。
 - 历史 v0.1.0-preview.4 与 preview.5 Release 保留；preview.5 仍作为历史 M14 测试包。
 - **实机验收边界：** Windows Actions/WinForms smoke 不能代替用户 Windows 10/11 桌面的真实键鼠、DPI/多屏、托盘/退出、权限弹窗和长时稳定性验收；M14 设备实测在取得证据前继续 NOT RUN。
+
 ## 完整产品目标已冻结（2026-11-13）
 - 产品范围基线：[docs/PRD-CN.md](PRD-CN.md)。
 - 完整功能矩阵（当前状态、阶段、验收条件）：[docs/FEATURE-MATRIX-CN.md](FEATURE-MATRIX-CN.md)。

@@ -11,6 +11,8 @@ Windows 10/11 x64 键鼠自动化与 Lua 脚本开发环境，基于 WinForms、
 - Windows x64 ZIP：https://github.com/xiaobei206/anjian/releases/download/v0.1.0-preview.6/MouscriptStudio-0.1.0-preview.6-win-x64.zip
 - SHA256 sidecar：https://github.com/xiaobei206/anjian/releases/download/v0.1.0-preview.6/MouscriptStudio-0.1.0-preview.6-win-x64.zip.sha256
 - preview.6 改进：图像资源窗口 SplitContainer 启动安全、分割宽度边界保护、分类下拉菜单、常用操作分行布局、640×124 DPI-aware 悬浮窗。
+- ZIP：87,639,119 bytes；SHA256：`dc34931ec3735b4ebbaff7637a26d2b32c2039cceee9fe5fdb53dcf4f343c6bb`。
+- Windows Actions run [43726469737](https://github.com/xiaobei206/anjian/actions/runs/43726469737) SUCCESS：228/228 Core tests、0 build warnings/errors、API handbook、self-contained publish、Image Resource Manager UI smoke、packaged Worker smoke、ZIP/SHA 与 Release 创建全 PASS。
 
 ### Mouscript Lite（独立稳定版）
 
@@ -18,6 +20,8 @@ Windows 10/11 x64 键鼠自动化与 Lua 脚本开发环境，基于 WinForms、
 - Release：https://github.com/xiaobei206/anjian/releases/tag/v1.0.0
 - Windows x64 ZIP：https://github.com/xiaobei206/anjian/releases/download/v1.0.0/MouscriptLite-1.0.0-win-x64.zip
 - SHA256 sidecar：https://github.com/xiaobei206/anjian/releases/download/v1.0.0/MouscriptLite-1.0.0-win-x64.zip.sha256
+- ZIP：51,911,007 bytes；SHA256：`ffab0dd7382a927949f405b5daf39b35a490c03539e17b507f4f5cbb286c0eb2`。
+- Windows Actions run [43726550455](https://github.com/xiaobei206/anjian/actions/runs/43726550455) SUCCESS：7/7 Core tests、0 build warnings/errors、自包含发布、ZIP/SHA、旧品牌资产清理与稳定 Release 更新全 PASS。
 - Lite 严格冻结于原 v0.1.0-preview.4 代码基线，不含后续 IDE、图像资源、OCR、参数设计器、插件、小精灵和多实例等功能。
 
 下载 ZIP 后先核对同目录 SHA256 sidecar，再完整解压并保留全部伴随文件，启动 `Anjian.App.exe`。Windows Actions 通过只代表构建和自动化检查通过；Windows 10/11 实机键鼠、DPI/多屏、托盘、权限与长时间稳定性仍需单独验收。
